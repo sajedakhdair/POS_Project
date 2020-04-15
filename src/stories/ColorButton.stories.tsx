@@ -4,13 +4,14 @@ import ColorButton from "../components/ColorButton";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, text, select } from "@storybook/addon-knobs";
 storiesOf("ColorButton", module)
-  .addDecorator(withKnobs)
   .add("red", () => (
     <ColorButton
-      color={select("color", { Red: "red", Dark: "darkred" }, "red")}
-      onClick={action("clicked")}
-    />
+      color= "red"
+      onClick={action("clicked")}>hello World
+    </ColorButton>
   ))
   .add("blue", () => (
-    <ColorButton color={text("color", "blue")} onClick={action("clicked")} />
+    <ColorButton color= "blue" onClick={action("clicked")}>
+      hello World
+    </ColorButton>
   ));
