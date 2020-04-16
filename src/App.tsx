@@ -1,12 +1,15 @@
 import React from "react";
-import ColorButton from "../src/components/ColorButton";
+import LogInComponent from "../src/components/LoginComponent";
 import "./App.css";
-
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ColorButton color="green">Hello World</ColorButton>
+        <LogInComponent
+          bgColorForForm="#999"
+          bgColorForTextField="#FFF"
+          bgColorForButton="#4d70fe"
+        />
       </header>
     </div>
   );
