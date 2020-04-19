@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 
 function MainPage() {
+  useEffect(() => {
+    localStorage.setItem("flagForLoggedIn", "true");
+    return () => {
+      localStorage.setItem("flagForLoggedIn", "false");
+    };
+  });
   return (
     <div className="App">
       <header className="App-header">
@@ -10,5 +16,4 @@ function MainPage() {
     </div>
   );
 }
-
 export default MainPage;
