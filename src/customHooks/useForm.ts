@@ -51,10 +51,16 @@ const useForm = () => {
 
     useEffect(() => {
         if (errors.userNameError === "" && errors.passwordError === "" && isSubmitting) {
-            history.push("/MainPage");
-        };
+            fetch(`http://localhost:3001/users?username=${userInformation.userName}&password=${userInformation.password}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.length !== 0) {
+                        history.push("/MainPage");
+                    }
+                })
+        }
     }, [errors])
-    
+
     const returnValues = { handleChange, handleSubmit, userInformation, errors }
     return returnValues
 };
