@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useHistory } from "react-router-dom";
 
 const useForm = () => {
     const [userInformation, setValues] = useState({ userName: "", password: "" });
@@ -6,6 +7,8 @@ const useForm = () => {
         flagForuserNameErrors: false, userNameError: "",
         flagForPasswordError: false, passwordError: ""
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const history = useHistory();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
@@ -15,6 +18,7 @@ const useForm = () => {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setErrors(checkValues());
+        setIsSubmitting(true);
     };
 
     const checkValues = () => {
@@ -45,6 +49,12 @@ const useForm = () => {
         return ((errors));
     }
 
+    useEffect(() => {
+        if (errors.userNameError === "" && errors.passwordError === "" && isSubmitting) {
+            history.push("/MainPage");
+        };
+    }, [errors])
+    
     const returnValues = { handleChange, handleSubmit, userInformation, errors }
     return returnValues
 };
