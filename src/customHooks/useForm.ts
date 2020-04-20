@@ -22,8 +22,10 @@ const useForm = () => {
         const errors: errorsProps = checkValues(userInformation);
         const hasErrors: boolean = isThereAnyError(errors);
         if (!hasErrors) {
-            if (await fetchSubmitLogin(userInformation))
+            if (await fetchSubmitLogin(userInformation)) {
                 history.push("/MainPage");
+                localStorage.setItem("flagForLoggedIn", "true");
+            }
         }
         else setErrors(errors);
     };
