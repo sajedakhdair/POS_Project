@@ -12,7 +12,8 @@ import AttachMoneyIcon from "@material-ui/icons/AttachMoney"; //$
 import AssessmentIcon from "@material-ui/icons/Assessment"; //report
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import ReceiptIcon from "@material-ui/icons/Receipt";
-import People from "./PeopleMenu";
+import PeopleMenu from "./PeopleMenu";
+import CategoriesMenu from "./CategoriesMenu";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -72,8 +73,7 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
             <LocalMallIcon color="inherit" fontSize="small" />
             Product
           </Link>
-
-          <People classes={{ linkItem: classes.linkItem }} />
+          <PeopleMenu classes={{ linkItem: classes.linkItem }} />
           <Link
             href="#"
             color="inherit"
@@ -91,17 +91,7 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
             <AttachMoneyIcon color="inherit" fontSize="small" />
             Expense
           </Link>
-          <Link
-            href="#"
-            color="inherit"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            className={classes.linkItem}
-            underline="none"
-          >
-            <BookmarkIcon color="inherit" fontSize="small" />
-            Categories
-          </Link>
+          <CategoriesMenu classes={{ linkItem: classes.linkItem }} />
           <Link
             href="#"
             color="inherit"
