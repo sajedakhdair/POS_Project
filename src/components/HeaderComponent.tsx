@@ -10,10 +10,9 @@ import BookmarkIcon from "@material-ui/icons/Bookmark"; //cat
 import SettingsIcon from "@material-ui/icons/Settings";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney"; //$
 import AssessmentIcon from "@material-ui/icons/Assessment"; //report
-import TrendingUpIcon from "@material-ui/icons/TrendingUp"; //report2
-import PeopleIcon from "@material-ui/icons/People"; //people
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import ReceiptIcon from "@material-ui/icons/Receipt";
+import People from "./PeopleMenu";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -73,15 +72,8 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
             <LocalMallIcon color="inherit" fontSize="small" />
             Product
           </Link>
-          <Link
-            href="#"
-            color="inherit"
-            className={classes.linkItem}
-            underline="none"
-          >
-            <PeopleIcon color="inherit" fontSize="small" />
-            People
-          </Link>
+
+          <People classes={{ linkItem: classes.linkItem }} />
           <Link
             href="#"
             color="inherit"
