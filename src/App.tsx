@@ -1,7 +1,8 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "../src/pages/LoginPage";
 import MainPage from "../src/pages/MainPage";
+import HeaderComponent from "../src/components/HeaderComponent";
 
 import "./App.css";
 function App() {
@@ -9,8 +10,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Router>
-          <Route exact path="/" component={LoginPage} />
-          <Route path="/MainPage" component={MainPage} />
+          <Switch>
+            <Route exact path="/" component={LoginPage} />
+            <Fragment>
+              <HeaderComponent />
+              <Route path="/MainPage" component={MainPage} />
+            </Fragment>
+          </Switch>
         </Router>
       </header>
     </div>
