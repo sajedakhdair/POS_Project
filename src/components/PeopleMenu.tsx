@@ -7,6 +7,7 @@ import AirportShuttleIcon from "@material-ui/icons/AirportShuttle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { withStyles, WithStyles } from "@material-ui/core/styles";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -59,8 +60,9 @@ const PeopleMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
         className={classes.linkItem}
         underline="none"
       >
-        <PeopleIcon color="inhrite" fontSize="small" />
+        <PeopleIcon color="inherit" fontSize="small" />
         People
+        <ArrowDropDownIcon color="inherit" fontSize="small" />
       </Link>
       {renderMenu}
     </div>

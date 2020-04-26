@@ -7,6 +7,7 @@ import { withStyles, WithStyles } from "@material-ui/core/styles";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney"; //$
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import BookmarkIcon from "@material-ui/icons/Bookmark"; //cat
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -62,6 +63,7 @@ const CategoriesMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
       >
         <BookmarkIcon color="inherit" fontSize="small" />
         Categories
+        <ArrowDropDownIcon color="inherit" fontSize="small" />
       </Link>
       {renderMenu}
     </div>
