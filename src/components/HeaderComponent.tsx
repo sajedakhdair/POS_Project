@@ -19,6 +19,7 @@ import avater from "../imgs/avater.jpeg";
 import english from "../imgs/en.png";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LanguageMenu from "./LanguageMenu";
+import { useHistory } from "react-router-dom";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -79,6 +80,11 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
   props
 ) => {
   const classes = props.classes;
+  const history = useHistory();
+  const logout = () => {
+    history.push("/");
+    localStorage.setItem("flagForLoggedIn", "false");
+  };
   return (
     <AppBar className={classes.appBar}>
       <Toolbar>
@@ -153,7 +159,7 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
           {/* i will change it to the userName  */}
         </Box>
         <LanguageMenu classes={{ colorButton: classes.colorButton }} />
-        <Button className={classes.colorButton}>
+        <Button onClick={logout} className={classes.colorButton}>
           <ExitToAppIcon fontSize="default" />
         </Button>
       </Box>
