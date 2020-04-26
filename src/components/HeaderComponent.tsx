@@ -85,6 +85,8 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
     history.push("/");
     localStorage.setItem("flagForLoggedIn", "false");
   };
+  const userName = localStorage.getItem("userName");
+
   return (
     <AppBar className={classes.appBar}>
       <Toolbar>
@@ -155,8 +157,7 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
             src={avater}
             className={classes.avatar}
           />
-          <Typography>userName </Typography>
-          {/* i will change it to the userName  */}
+          <Typography>{userName} </Typography>
         </Box>
         <LanguageMenu classes={{ colorButton: classes.colorButton }} />
         <Button onClick={logout} className={classes.colorButton}>
