@@ -23,14 +23,14 @@ import LanguageMenu from "./LanguageMenu";
 const styles = (theme: Theme) =>
   createStyles({
     appBar: {
-      backgroundColor: "#f5f5f5",
+      backgroundColor: theme.palette.grey[50],
       displat: "flex",
       flexDirection: "row",
       padding: theme.spacing(1),
     },
     containerForAllLinks: {
       display: "flex",
-      backgroundColor: "#f5f5f5",
+      backgroundColor: theme.palette.grey[50],
     },
     linkItem: {
       display: "flex",
@@ -38,7 +38,10 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing(1),
       fontSize: 14.5,
       fontFamily: "lato",
-      color: "#979797",
+      color: theme.palette.grey[600],
+      "&:hover": {
+        color: theme.palette.text.primary,
+      },
     },
     livePOSImg: {
       paddingTop: theme.spacing(2.4),
@@ -50,7 +53,7 @@ const styles = (theme: Theme) =>
     rightPartOfHeader: {
       display: "flex",
       alignItems: "center",
-      marginLeft: theme.spacing(12),
+      marginLeft: theme.spacing(8),
     },
     languageImg: {
       maxHeight: 35,
