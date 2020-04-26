@@ -18,6 +18,7 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import avater from "../imgs/avater.jpeg";
 import english from "../imgs/en.png";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import LanguageMenu from "./LanguageMenu";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -148,10 +149,7 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
           <Typography>userName </Typography>
           {/* i will change it to the userName  */}
         </Box>
-        <Button href="#" className={classes.colorButton}>
-          <img src={english} className={classes.languageImg} alt="english" />
-          <ArrowDropDownIcon fontSize="small" />
-        </Button>
+        <LanguageMenu classes={{ colorButton: classes.colorButton }} />
         <Button className={classes.colorButton}>
           <ExitToAppIcon fontSize="default" />
         </Button>
