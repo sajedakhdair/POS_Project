@@ -3,6 +3,7 @@ import Box from "@material-ui/core/Box";
 import { withStyles, WithStyles, createStyles } from "@material-ui/core/styles";
 import LogInComponent from "../components/LoginComponent";
 import BackgroundImage from "../imgs/login.jpg";
+import { useHistory } from "react-router-dom";
 
 const styles = createStyles({
   root: {
@@ -18,6 +19,9 @@ const styles = createStyles({
 });
 function LoginPage(props: WithStyles<typeof styles>) {
   const { classes } = props;
+  const flagForLoggedIn = localStorage.getItem("flagForLoggedIn");
+  const history = useHistory();
+  if (flagForLoggedIn === "true") history.push("/MainPage");
   return (
     <Box className={classes.root}>
       <LogInComponent
