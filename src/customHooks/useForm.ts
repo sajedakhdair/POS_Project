@@ -23,8 +23,9 @@ const useForm = () => {
         const hasErrors: boolean = isThereAnyError(errors);
         if (!hasErrors) {
             if (await fetchSubmitLogin(userInformation)) {
-                history.push("/MainPage");
                 localStorage.setItem("flagForLoggedIn", "true");
+                localStorage.setItem("userName", userInformation.userName)
+                history.push("/MainPage");
             }
         }
         else setErrors(errors);
