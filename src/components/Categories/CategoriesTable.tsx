@@ -14,6 +14,7 @@ import { TableContent } from "../../types";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
+import DeleteCategoryDialog from "./DeleteCategoryDialog";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -83,14 +84,10 @@ const CategoriesTable: React.FC<
                       );
                     })}
                     <TableCell className={classes.tableCell}>
-                      <IconButton
-                        color="inherit"
-                        onClick={() => {
-                          handleDelete(row.id);
-                        }}
-                      >
-                        <DeleteForeverIcon fontSize="small" />
-                      </IconButton>
+                      <DeleteCategoryDialog
+                        id={row.id}
+                        onDelete={handleDelete}
+                      />
                       <IconButton
                         color="inherit"
                         aria-label="upload picture"
