@@ -9,3 +9,8 @@ export interface errorsProps {
     flagForPasswordError: boolean;
     passwordError: string;
 }
+export interface Category {
+    id: number;
+    name: string;
+    date: string;
+}
