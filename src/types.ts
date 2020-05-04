@@ -14,3 +14,18 @@ export interface Category {
     name: string;
     date: string;
 }
+
+export interface Column {
+    id: "name" | "date";
+    label: string;
+    minWidth?: number;
+    align?: "center" | "left" |"right";
+}
+export interface TableContent {
+    rows: Category[];
+    columns: Column[];
+}
+export interface Actions {
+    onDelete: Function;
+    onEdit: Function;
+}
