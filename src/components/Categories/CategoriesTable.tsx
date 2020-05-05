@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -36,9 +36,14 @@ const CategoriesTable: React.FC<
 > = (props) => {
   const classes = props.classes;
   const handleDelete = props.onDelete;
-  const rows = props.rows;
+  const incomingRows = props.rows;
   const columns = props.columns;
   const handleEdit = props.onEdit;
+
+  const [rows, setRows] = useState(incomingRows);
+  useEffect(() => {
+    setRows(incomingRows);
+  }, [incomingRows]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
