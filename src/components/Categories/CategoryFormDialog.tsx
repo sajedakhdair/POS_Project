@@ -45,6 +45,8 @@ const CategoryFormDialog: React.FunctionComponent<
       : "Enter Category Name";
 
   const [name, setName] = useState("");
+  const [textFieldErrorStatus, setTextFieldErrorStatus] = useState(false);
+  const [textFieldErrorMsg, setTextFieldErrorMsg] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -57,6 +59,17 @@ const CategoryFormDialog: React.FunctionComponent<
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
     setName(newName);
+  };
+
+  const handleSubmit = () => {
+    if (name.length === 0) {
+      setTextFieldErrorStatus(true);
+      setTextFieldErrorMsg("Please fill out the category Name");
+    } else {
+      setTextFieldErrorStatus(false);
+      handleClose();
+      mode === "Edit" ? handleEvent(props.category, name) : handleEvent(name);
+    }
   };
 
   const DialogButton =
@@ -97,6 +110,8 @@ const CategoryFormDialog: React.FunctionComponent<
             fullWidth
             placeholder={placeHolhderForTextFeild}
             onChange={handleChange}
+            error={textFieldErrorStatus}
+            helperText={textFieldErrorMsg}
           />
         </DialogContent>
         <DialogActions>
@@ -108,12 +123,7 @@ const CategoryFormDialog: React.FunctionComponent<
             Cancel
           </Button>
           <Button
-            onClick={() => {
-              handleClose();
-              mode === "Edit"
-                ? handleEvent(props.category, name)
-                : handleEvent(name);
-            }}
+            onClick={handleSubmit}
             color="primary"
             variant="contained"
             className={classes.button}
