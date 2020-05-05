@@ -33,7 +33,7 @@ const DeleteCategoryDialog: React.FunctionComponent<
   };
 
   return (
-    <div>
+    <>
       <IconButton color="inherit" onClick={handleClickOpen}>
         <DeleteForeverIcon fontSize="small" />
       </IconButton>
@@ -64,7 +64,7 @@ const DeleteCategoryDialog: React.FunctionComponent<
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 
