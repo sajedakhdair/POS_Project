@@ -15,6 +15,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteCategoryDialog from "./DeleteCategoryDialog";
+import CategoryFormDialog from "./CategoryFormDialog";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -88,15 +89,11 @@ const CategoriesTable: React.FC<
                         id={row.id}
                         onDelete={handleDelete}
                       />
-                      <IconButton
-                        color="inherit"
-                        aria-label="upload picture"
-                        onClick={() => {
-                          handleEdit(row, "newName");
-                        }}
-                      >
-                        <EditIcon fontSize="small" />
-                      </IconButton>
+                      <CategoryFormDialog
+                        mode="Edit"
+                        category={row}
+                        onEditOrOnCreate={handleEdit}
+                      />
                     </TableCell>
                   </TableRow>
                 );
