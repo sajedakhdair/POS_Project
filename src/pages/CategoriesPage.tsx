@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import CategoriesTable from "../components/Categories/CategoriesTable";
 import { Category, Column } from "../types";
 import { fetchCategories, fetchDeleteCategory } from "../apis/fetchCategories";
-
+import { fetchEditCategory } from "../apis/fetchCategories";
 const styles = (theme: Theme) => createStyles({});
 
 function CategoriesPage(props: WithStyles<typeof styles>) {
@@ -34,7 +34,11 @@ function CategoriesPage(props: WithStyles<typeof styles>) {
     onfetchCategories();
   };
 
-  const onEdit = (selectedCategory: Category, name: string) => {};
+  const onEdit = async (selectedCategory: Category, name: string) => {
+    const result = await fetchEditCategory(selectedCategory, name);
+    console.log(result);
+    onfetchCategories();
+  };
 
   useEffect(() => {
     onfetchCategories();
