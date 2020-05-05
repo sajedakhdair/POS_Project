@@ -40,12 +40,15 @@ const CategoriesMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
       open={isMenuOpen}
       onClose={handleCategoriesMenuClose}
     >
-      <MenuItem onClick={handleCategoriesMenuClose}>
+      <MenuItem
+        component={Link}
+        href="/MainPage/CategoriesPage"
+        onClick={handleCategoriesMenuClose}
+      >
         <LocalMallIcon fontSize="small" />
         Product
       </MenuItem>
       <MenuItem onClick={handleCategoriesMenuClose}>
-        {" "}
         <AttachMoneyIcon fontSize="small" />
         Expense
       </MenuItem>
