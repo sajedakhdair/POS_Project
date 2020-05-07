@@ -42,7 +42,7 @@ const CategoriesMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
     >
       <MenuItem
         component={Link}
-        href="/MainPage/CategoriesPage"
+        href="/CategoriesPage"
         onClick={handleCategoriesMenuClose}
       >
         <LocalMallIcon fontSize="small" />

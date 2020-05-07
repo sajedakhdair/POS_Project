@@ -1,3 +1,4 @@
+import { WithStyles } from "@material-ui/core/styles/withStyles";
 
 export interface userInformationProps {
     userName: string;
@@ -16,10 +17,10 @@ export interface Category {
 }
 
 export interface Column {
-    id: "name" | "date";
+    id: keyof Category;
     label: string;
     minWidth?: number;
-    align?: "center" | "left" |"right";
+    align?: "center" | "left" | "right";
 }
 export interface TableContent {
     rows: Category[];
@@ -29,3 +30,5 @@ export interface Actions {
     onDelete: Function;
     onEdit: Function;
 }
+
+export type CategoriesTableProps = TableContent & Actions & WithStyles

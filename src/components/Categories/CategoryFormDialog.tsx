@@ -24,25 +24,22 @@ const styles = (theme: Theme) =>
 interface Props {
   mode: "Edit" | "Create";
   category?: Category;
-  onEditOrOnCreate: Function;
+  onSubmit: Function;
 }
+type CategoryFormDialogProps = Props & WithStyles;
 
-const CategoryFormDialog: React.FunctionComponent<
-  Props & WithStyles<typeof styles>
-> = (props) => {
-  const classes = props.classes;
+const CategoryFormDialog: React.FunctionComponent<CategoryFormDialogProps> = ({
+  classes,
+  mode,
+  onSubmit,
+  category,
+}) => {
   const [open, setOpen] = React.useState(false);
-  const handleEvent = props.onEditOrOnCreate;
-  const mode = props.mode;
   const titleOfForm: string =
     mode === "Edit" ? "Edit Category Name" : "Add Category";
 
   const placeHolhderForTextFeild: string =
-    mode === "Edit"
-      ? props.category
-        ? props.category.name
-        : ""
-      : "Enter Category Name";
+    mode === "Edit" ? (category ? category.name : "") : "Enter Category Name";
 
   const [name, setName] = useState("");
   const [textFieldErrorStatus, setTextFieldErrorStatus] = useState(false);
@@ -68,7 +65,7 @@ const CategoryFormDialog: React.FunctionComponent<
     } else {
       setTextFieldErrorStatus(false);
       handleClose();
-      mode === "Edit" ? handleEvent(props.category, name) : handleEvent(name);
+      mode === "Edit" ? onSubmit(category, name) : onSubmit(name);
     }
   };
 

@@ -16,7 +16,7 @@ function App() {
             <Fragment>
               <HeaderComponent />
               <Route
-                path="/MainPage/CategoriesPage"
+                path="/CategoriesPage"
                 component={CategoriesPage}
               />
               <Route exact path="/MainPage" component={MainPage} />

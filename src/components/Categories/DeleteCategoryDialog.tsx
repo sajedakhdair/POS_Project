@@ -16,12 +16,13 @@ interface Props {
   id: number;
   onDelete: Function;
 }
+type DeleteCategoryDialogProps = Props & WithStyles;
 
-const DeleteCategoryDialog: React.FunctionComponent<
-  Props & WithStyles<typeof styles>
-> = (props) => {
-  const handleDelete = props.onDelete;
-  const id = props.id;
+const DeleteCategoryDialog: React.FunctionComponent<DeleteCategoryDialogProps> = ({
+  classes,
+  id,
+  onDelete: handleDelete,
+}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {

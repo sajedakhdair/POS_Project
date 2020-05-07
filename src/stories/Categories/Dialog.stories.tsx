@@ -14,12 +14,12 @@ storiesOf("Dialog", module)
     <CategoryFormDialog
       mode="Edit"
       category={{ id: 1, name: "fruits", date: "2020-05-29 08:24:29" }}
-      onEditOrOnCreate={action("submit for edit category clicked")}
+      onSubmit={action("submit for edit category clicked")}
     />
   ))
   .add("CreateCategoryFormDialog", () => (
     <CategoryFormDialog
       mode="Create"
-      onEditOrOnCreate={action("submit for create category clicked")}
+      onSubmit={action("submit for create category clicked")}
     />
   ));

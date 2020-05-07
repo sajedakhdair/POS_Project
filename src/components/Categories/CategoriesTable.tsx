@@ -16,7 +16,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteCategoryDialog from "./DeleteCategoryDialog";
 import CategoryFormDialog from "./CategoryFormDialog";
-
+import { CategoriesTableProps } from "../../types";
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -31,15 +31,13 @@ const styles = (theme: Theme) =>
     },
   });
 
-const CategoriesTable: React.FC<
-  TableContent & Actions & WithStyles<typeof styles>
-> = (props) => {
-  const classes = props.classes;
-  const handleDelete = props.onDelete;
-  const incomingRows = props.rows;
-  const columns = props.columns;
-  const handleEdit = props.onEdit;
-
+const CategoriesTable: React.FC<CategoriesTableProps> = ({
+  classes,
+  columns = [],
+  rows: incomingRows,
+  onDelete: handleDelete,
+  onEdit: handleEdit,
+}) => {
   const rows = useMemo(() => incomingRows.slice(), [incomingRows]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -93,7 +91,7 @@ const CategoriesTable: React.FC<
                       <CategoryFormDialog
                         mode="Edit"
                         category={row}
-                        onEditOrOnCreate={handleEdit}
+                        onSubmit={handleEdit}
                       />
                     </TableCell>
                   </TableRow>
