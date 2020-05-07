@@ -23,11 +23,12 @@ const styles = (theme: Theme) =>
       width: "75%",
     },
     container: {
-      maxHeight: 300,
+      maxHeight: 280,
     },
     tableCell: {
       minWidth: 170,
       align: "left",
+      padding: theme.spacing(0.2, 0.5, 0.2, 1.5),
     },
   });
 
@@ -40,7 +41,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
 }) => {
   const rows = useMemo(() => incomingRows.slice(), [incomingRows]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -80,7 +81,12 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell align={column.align}>{value}</TableCell>
+                        <TableCell
+                          align={column.align}
+                          className={classes.tableCell}
+                        >
+                          {value}
+                        </TableCell>
                       );
                     })}
                     <TableCell className={classes.tableCell}>
@@ -101,7 +107,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[5, 10, 15, 25]}
+        rowsPerPageOptions={[4, 8, 16, 32]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
