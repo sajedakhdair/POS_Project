@@ -1,19 +1,18 @@
 import { Category } from "../types";
+const baseUrl = "http://localhost:3001"
 
-export const fetchCategories = async (): Promise<Category[]> => {
-    return await fetch("http://localhost:3001/categories")
+export const fetchCategories = (): Promise<Category[]> => {
+    return fetch(`${baseUrl}/categories`)
         .then((response) => response.json())
 };
 
-export const fetchDeleteCategory = async (id: string) => {
-    await fetch(`http://localhost:3001/categories/${id}`, {
+export const fetchDeleteCategory = (id: string) => {
+    return fetch(`${baseUrl}/categories/${id}`, {
         method: "DELETE",
-    }).catch((error) => {
-        console.error(error);
-    });
+    }).then((response) => response.json())
 };
 
-export const fetchValidateCategoryName = async (name: string): Promise<boolean> => {
+export const fetchValidateCategoryName = (name: string): Promise<boolean> => {
     return fetchCategories().then((data) => {
         const result = data.filter(category => category.name === name)
         if (result.length === 0)
@@ -22,22 +21,19 @@ export const fetchValidateCategoryName = async (name: string): Promise<boolean> 
     })
 }
 
-export const fetchEditCategory = async (selectedCategory: Category, name: string
-): Promise<boolean> => {
-    const validationStatus = await fetchValidateCategoryName(name);
-    if (!validationStatus)
-        return false
-    else {
-        let updatedCategory = { ...selectedCategory, name: name };
-        await fetch(`http://localhost:3001/categories/${selectedCategory.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(updatedCategory)
-        }).catch((error) => {
-            console.error(error);
-        });
-        return true;
-    }
-};
+export const fetchEditCategory = (selectedCategory: Category, name: string
+) => {
+    return fetchValidateCategoryName(name).then((result) => {
+        if (result === true) {
+            let updatedCategory = { ...selectedCategory, name: name };
+            fetch(`${baseUrl}/categories/${selectedCategory.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedCategory)
+            }).then((response) => response.json())
+        }
+        return result
+    })
+};  

@@ -24,9 +24,10 @@ function CategoriesPage(props: WithStyles<typeof styles>) {
     },
   ];
 
-  const onfetchCategories = async () => {
-    let categories: Category[] = await fetchCategories();
-    setRows(categories);
+  const onfetchCategories = () => {
+    fetchCategories().then((data) => {
+      setRows(data);
+    });
   };
 
   const onDelete = async (id: string) => {
@@ -36,7 +37,6 @@ function CategoriesPage(props: WithStyles<typeof styles>) {
 
   const onEdit = async (selectedCategory: Category, name: string) => {
     const result = await fetchEditCategory(selectedCategory, name);
-    console.log(result);
     onfetchCategories();
   };
 
