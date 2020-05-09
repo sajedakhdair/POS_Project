@@ -4,7 +4,11 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import CategoriesTable from "../components/Categories/CategoriesTable";
 import { Category, Column } from "../types";
-import { fetchCategories, fetchDeleteCategory } from "../apis/fetchCategories";
+import {
+  fetchCategories,
+  fetchDeleteCategory,
+  fetchAddCategory,
+} from "../apis/fetchCategories";
 import { fetchEditCategory } from "../apis/fetchCategories";
 import Grid from "@material-ui/core/Grid";
 import CategoryFormDialog from "../components/Categories/CategoryFormDialog";
@@ -37,6 +41,7 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       align: "left",
     },
   ];
+  const [validationStatus, setValidationStatus] = useState(false);
 
   const onfetchCategories = () => {
     fetchCategories().then((data) => {
@@ -50,11 +55,20 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   };
 
   const onEdit = async (selectedCategory: Category, name: string) => {
-    const result = await fetchEditCategory(selectedCategory, name);
+    await fetchEditCategory(selectedCategory, name).then((result) => {
+      setValidationStatus(result);
+    });
     onfetchCategories();
+    return validationStatus;
   };
 
-  const onAdd = async (name: string) => {};
+  const onAdd = (name: string) => {
+    fetchAddCategory(name).then((result) => {
+      setValidationStatus(result);
+    });
+    onfetchCategories();
+    return validationStatus;
+  };
 
   useEffect(() => {
     onfetchCategories();

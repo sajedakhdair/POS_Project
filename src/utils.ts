@@ -1,6 +1,7 @@
 import { userInformationProps } from "./types";
 import { errorsProps } from "./types";
 
+//******login component******
 export const checkValues = (userInformation: userInformationProps): errorsProps => {
     let errors = {
         flagForuserNameErrors: false, userNameError: "",
@@ -33,4 +34,16 @@ export const isThereAnyError = (errors: errorsProps): boolean => {
     if (!errors.flagForuserNameErrors && !errors.flagForPasswordError)
         return false
     else return true
-} 
+}
+
+//** Category component **
+export const formatDate = () => {
+    let currentDateTime = new Date();
+    let formattedDate = currentDateTime.getFullYear() + "-" +
+        (currentDateTime.getMonth() + 1) + "-" +
+        currentDateTime.getDate() + " " +
+        currentDateTime.getHours() + ":" +
+        currentDateTime.getMinutes() + ":"
+        + currentDateTime.getSeconds()
+    return formattedDate;
+}
