@@ -20,7 +20,7 @@ import { CategoriesTableProps } from "../../types";
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: "75%",
+      width: "95%",
     },
     container: {
       maxHeight: 280,

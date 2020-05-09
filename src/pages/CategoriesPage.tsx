@@ -6,9 +6,23 @@ import CategoriesTable from "../components/Categories/CategoriesTable";
 import { Category, Column } from "../types";
 import { fetchCategories, fetchDeleteCategory } from "../apis/fetchCategories";
 import { fetchEditCategory } from "../apis/fetchCategories";
-const styles = (theme: Theme) => createStyles({});
+import Grid from "@material-ui/core/Grid";
+import CategoryFormDialog from "../components/Categories/CategoryFormDialog";
 
-function CategoriesPage(props: WithStyles<typeof styles>) {
+const styles = (theme: Theme) =>
+  createStyles({
+    gridContainer: {
+      backgroundColor: theme.palette.grey[50],
+      paddingTop: theme.spacing(19),
+      paddingBottom: theme.spacing(19),
+      display: "flex",
+    },
+    categoriesTableGrid: {
+      margin: theme.spacing(2, 3, 7, 10),
+    },
+  });
+
+const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   const flagForLoggedIn = localStorage.getItem("flagForLoggedIn");
   const history = useHistory();
   if (flagForLoggedIn !== "true") history.push("/");
@@ -40,17 +54,26 @@ function CategoriesPage(props: WithStyles<typeof styles>) {
     onfetchCategories();
   };
 
+  const onAdd = async (name: string) => {};
+
   useEffect(() => {
     onfetchCategories();
   }, []);
 
   return (
-    <CategoriesTable
-      columns={columns}
-      rows={rows}
-      onDelete={onDelete}
-      onEdit={onEdit}
-    />
+    <Grid container className={classes.gridContainer}>
+      <Grid item xs={3}>
+        <CategoryFormDialog mode="Create" onSubmit={onAdd} />
+      </Grid>
+      <Grid item xs={12} className={classes.categoriesTableGrid}>
+        <CategoriesTable
+          columns={columns}
+          rows={rows}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
+      </Grid>
+    </Grid>
   );
-}
+};
 export default withStyles(styles)(CategoriesPage);
