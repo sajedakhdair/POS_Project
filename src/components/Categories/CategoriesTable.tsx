@@ -18,7 +18,7 @@ import DeleteCategoryDialog from "./DeleteCategoryDialog";
 import CategoryFormDialog from "./CategoryFormDialog";
 import { CategoriesTableProps } from "../../types";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
-import useStoreTable from "../../customHooks/useSortTable";
+import useSortTable from "../../customHooks/useSortTable";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -45,7 +45,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
   const rows = useMemo(() => incomingRows.slice(), [incomingRows]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
-  const { createSortHandler, stableSort, order, orderBy } = useStoreTable(
+  const { createSortHandler, stableSort, order, orderBy } = useSortTable(
     columns[0].id
   );
 

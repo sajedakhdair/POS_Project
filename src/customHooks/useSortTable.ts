@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Order } from "../types";
 
-const useStoreTable = (initialOrderBy: any) => {
+const useSortTable = (initialOrderBy: any) => {
     const [order, setOrder] = useState<Order>("asc");
     const [orderBy, setOrderBy] = useState(initialOrderBy);
 
