@@ -12,6 +12,7 @@ import {
 import { fetchEditCategory } from "../apis/fetchCategories";
 import Grid from "@material-ui/core/Grid";
 import CategoryFormDialog from "../components/Categories/CategoryFormDialog";
+import Search from "../components/Search";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -23,6 +24,20 @@ const styles = (theme: Theme) =>
     },
     categoriesTableGrid: {
       margin: theme.spacing(2, 3, 7, 10),
+    },
+    searchTextField: {
+      position: "relative",
+      top: theme.spacing(-2),
+      left: theme.spacing(56),
+    },
+    searchInputLabel: {
+      position: "relative",
+      top: theme.spacing(1),
+      left: theme.spacing(42),
+    },
+    inputTextHeight: {
+      maxHeight: theme.spacing(4),
+      width: theme.spacing(19),
     },
   });
 
@@ -66,6 +81,11 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
     return validationStatus;
   };
 
+  const onSearch = (rows: Category[], name: string): Category[] => {
+    const result = rows.filter((row) => row.name.includes(name));
+    return result;
+  };
+
   useEffect(() => {
     onfetchCategories();
   }, []);
@@ -74,6 +94,17 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
     <Grid container className={classes.gridContainer}>
       <Grid item xs={3}>
         <CategoryFormDialog mode="Create" onSubmit={onAdd} />
+      </Grid>
+      <Grid item xs={6}>
+        <Search
+          rows={rows}
+          onSearch={onSearch}
+          classes={{
+            searchTextField: classes.searchTextField,
+            searchInputLabel: classes.searchInputLabel,
+            inputTextHeight: classes.inputTextHeight,
+          }}
+        />
       </Grid>
       <Grid item xs={12} className={classes.categoriesTableGrid}>
         <CategoriesTable

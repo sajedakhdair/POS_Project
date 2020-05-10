@@ -35,7 +35,7 @@ const Search: React.FunctionComponent<
   };
 
   return (
-    <>
+      <>
       <InputLabel className={classes.searchInputLabel} htmlFor="searchText">
         Search:
       </InputLabel>
@@ -49,6 +49,7 @@ const Search: React.FunctionComponent<
           className: classes.inputTextHeight,
         }}
         label="Enter Search Text"
+        size="small"
       />
     </>
   );
