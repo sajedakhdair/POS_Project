@@ -153,7 +153,7 @@ const CategoryFormDialog: React.FunctionComponent<CategoryFormDialogProps> = ({
             Cancel
           </Button>
           <Button
-            disabled={circularProgress}
+            disabled={disabledButton}
             onClick={handleSubmit}
             color="primary"
             variant="contained"
