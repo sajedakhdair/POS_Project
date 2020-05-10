@@ -32,3 +32,5 @@ export interface Actions {
 }
 
 export type CategoriesTableProps = TableContent & Actions & WithStyles
+
+export type Order = "asc" | "desc";

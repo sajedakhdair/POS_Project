@@ -17,6 +17,9 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteCategoryDialog from "./DeleteCategoryDialog";
 import CategoryFormDialog from "./CategoryFormDialog";
 import { CategoriesTableProps } from "../../types";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import useStoreTable from "../../customHooks/useSortTable";
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
@@ -42,6 +45,9 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
   const rows = useMemo(() => incomingRows.slice(), [incomingRows]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(4);
+  const { createSortHandler, stableSort, order, orderBy } = useStoreTable(
+    columns[0].id
+  );
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -66,14 +72,20 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                  <TableSortLabel
+                    active={orderBy === column.id}
+                    direction={orderBy === column.id ? order : "asc"}
+                    onClick={createSortHandler(column.id)}
+                  >
+                    {column.label}
+                  </TableSortLabel>
                 </TableCell>
               ))}
               <TableCell className={classes.tableCell}>{"Actions"}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {stableSort(rows, order, orderBy)
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
