@@ -47,6 +47,9 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   if (flagForLoggedIn !== "true") history.push("/");
 
   const [rows, setRows] = useState<Category[]>([]);
+  const [copyOfMainRows, setcopyOfMainRows] = useState<Category[]>([]);
+  const [name, setName] = useState<string>("");
+  const [result, setResult] = useState<Category[]>([]);
   const columns: Column[] = [
     { id: "name", label: "Name", minWidth: 170, align: "left" },
     {
@@ -56,11 +59,11 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       align: "left",
     },
   ];
-  const [validationStatus, setValidationStatus] = useState(false);
 
   const onfetchCategories = () => {
     fetchCategories().then((data) => {
       setRows(data);
+      setcopyOfMainRows(data);
     });
   };
 
@@ -82,13 +85,16 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   };
 
   const onSearch = (rows: Category[], name: string): Category[] => {
+    setName(name);
     const result = rows.filter((row) => row.name.includes(name));
+    setResult(result);
     return result;
   };
 
   useEffect(() => {
-    onfetchCategories();
-  }, []);
+    if (name.length === 0) onfetchCategories();
+    else setRows(result);
+  }, [result, name]);
 
   return (
     <Grid container className={classes.gridContainer}>
@@ -97,7 +103,7 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       </Grid>
       <Grid item xs={6}>
         <Search
-          rows={rows}
+          rows={copyOfMainRows}
           onSearch={onSearch}
           classes={{
             searchTextField: classes.searchTextField,
