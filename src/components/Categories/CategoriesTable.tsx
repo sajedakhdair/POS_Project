@@ -116,6 +116,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
                       const value = row[column.id];
                       return (
                         <TableCell
+                          key={column.id}
                           align={column.align}
                           className={classes.tableCell}
                         >
@@ -123,7 +124,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
                         </TableCell>
                       );
                     })}
-                    <TableCell className={classes.tableCell}>
+                    <TableCell key="actions" className={classes.tableCell}>
                       <DeleteCategoryDialog
                         id={row.id}
                         onDelete={handleDelete}
