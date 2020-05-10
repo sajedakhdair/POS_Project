@@ -36,4 +36,4 @@ const useSortTable = (initialOrderBy: any) => {
     return returnValues
 };
 
-export default useStoreTable; 
+export default useSortTable; 
