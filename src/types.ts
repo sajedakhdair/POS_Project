@@ -34,3 +34,8 @@ export interface Actions {
 export type CategoriesTableProps = TableContent & Actions & WithStyles
 
 export type Order = "asc" | "desc";
+
+export interface SearchProps {
+    rows: Category[];//expand it later to may be Product[] 
+    onSearch: (rows: Category[], searchText: string) => typeof rows;
+} 
