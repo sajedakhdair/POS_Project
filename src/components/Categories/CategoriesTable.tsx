@@ -60,30 +60,52 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
     setPage(0);
   };
 
+  const tableHead = (
+    <TableHead>
+      <TableRow>
+        {columns.map((column) => (
+          <TableCell
+            key={column.id}
+            align={column.align}
+            style={{ minWidth: column.minWidth }}
+          >
+            <TableSortLabel
+              active={orderBy === column.id}
+              direction={orderBy === column.id ? order : "asc"}
+              onClick={createSortHandler(column.id)}
+            >
+              {column.label}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+        <TableCell className={classes.tableCell}>{"Actions"}</TableCell>
+      </TableRow>
+    </TableHead>
+  );
+
+  if (rows.length === 0)
+    return (
+      <Paper className={classes.root}>
+        <TableContainer className={classes.container}>
+          <Table stickyHeader aria-label="sticky table">
+            {tableHead}
+            <TableBody>
+              <TableRow>
+                <TableCell className={classes.tableCell}>
+                  {"No matching records found"}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    );
+
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={orderBy === column.id ? order : "asc"}
-                    onClick={createSortHandler(column.id)}
-                  >
-                    {column.label}
-                  </TableSortLabel>
-                </TableCell>
-              ))}
-              <TableCell className={classes.tableCell}>{"Actions"}</TableCell>
-            </TableRow>
-          </TableHead>
+          {tableHead}
           <TableBody>
             {stableSort(rows, order, orderBy)
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
