@@ -10,6 +10,9 @@ import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { Theme, createStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -18,6 +21,15 @@ const styles = (theme: Theme) =>
     dialogTitle: {
       backgroundColor: theme.palette.primary.dark,
       color: theme.palette.common.white,
+    },
+    circularProgress: {
+      position: "absolute",
+      left: "45%",
+      marginLeft: "-25px",
+      top: "50%",
+      marginTop: "-25px",
+      color: theme.palette.primary.dark,
+      size: "20px",
     },
   });
 
@@ -44,9 +56,18 @@ const CategoryFormDialog: React.FunctionComponent<CategoryFormDialogProps> = ({
   const [name, setName] = useState("");
   const [textFieldErrorStatus, setTextFieldErrorStatus] = useState(false);
   const [textFieldErrorMsg, setTextFieldErrorMsg] = useState("");
+  const [disabledButton, setDisabledButton] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [circularProgress, setCircularProgress] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
+    setName("");
+    setTextFieldErrorStatus(false);
+    setTextFieldErrorMsg("");
+    setDisabledButton(false);
+    setOpenSnackBar(false);
+    setCircularProgress(false);
   };
 
   const handleClose = () => {
@@ -58,14 +79,27 @@ const CategoryFormDialog: React.FunctionComponent<CategoryFormDialogProps> = ({
     setName(newName);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setDisabledButton(true);
+    let categoryNameValidationStatus: boolean;
     if (name.length === 0) {
       setTextFieldErrorStatus(true);
       setTextFieldErrorMsg("Please fill out the category Name");
     } else {
-      setTextFieldErrorStatus(false);
-      handleClose();
-      mode === "Edit" ? onSubmit(category, name) : onSubmit(name);
+      if (mode === "Edit") {
+        categoryNameValidationStatus = await onSubmit(category, name);
+      } else {
+        categoryNameValidationStatus = await onSubmit(name);
+      }
+      if (categoryNameValidationStatus) {
+        setCircularProgress(true);
+        setTimeout(() => {
+          handleClose();
+        }, 3000);
+      } else {
+        setOpenSnackBar(true);
+        handleClose();
+      }
     }
   };
 
@@ -98,7 +132,6 @@ const CategoryFormDialog: React.FunctionComponent<CategoryFormDialogProps> = ({
         </DialogTitle>
         <DialogContent className={classes.dialog}>
           <TextField
-            required
             autoFocus
             margin="dense"
             id="name"
@@ -120,6 +153,7 @@ const CategoryFormDialog: React.FunctionComponent<CategoryFormDialogProps> = ({
             Cancel
           </Button>
           <Button
+            disabled={circularProgress}
             onClick={handleSubmit}
             color="primary"
             variant="contained"
@@ -127,8 +161,30 @@ const CategoryFormDialog: React.FunctionComponent<CategoryFormDialogProps> = ({
           >
             Submit
           </Button>
+          {circularProgress ? (
+            <CircularProgress className={classes.circularProgress} />
+          ) : null}
         </DialogActions>
       </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        open={openSnackBar}
+        message="Please try again as category name must be unique :("
+        action={
+          <IconButton
+            size="small"
+            color="inherit"
+            onClick={() => {
+              setOpenSnackBar(false);
+            }}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        }
+      />
     </>
   );
 };

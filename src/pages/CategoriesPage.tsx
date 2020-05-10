@@ -55,17 +55,13 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   };
 
   const onEdit = async (selectedCategory: Category, name: string) => {
-    await fetchEditCategory(selectedCategory, name).then((result) => {
-      setValidationStatus(result);
-    });
+    const validationStatus = await fetchEditCategory(selectedCategory, name);
     onfetchCategories();
     return validationStatus;
   };
 
-  const onAdd = (name: string) => {
-    fetchAddCategory(name).then((result) => {
-      setValidationStatus(result);
-    });
+  const onAdd = async (name: string) => {
+    const validationStatus = await fetchAddCategory(name);
     onfetchCategories();
     return validationStatus;
   };
