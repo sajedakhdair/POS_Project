@@ -5,20 +5,15 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import { withStyles, WithStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { createStyles, Theme } from "@material-ui/core/styles";
-import { Actions } from "../../types";
-import { TableContent } from "../../types";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import IconButton from "@material-ui/core/IconButton";
 import DeleteCategoryDialog from "./DeleteCategoryDialog";
 import CategoryFormDialog from "./CategoryFormDialog";
 import { CategoriesTableProps } from "../../types";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import useSortTable from "../../customHooks/useSortTable";
+import useTablePagination from "../../customHooks/useTablePagination";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -43,22 +38,12 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
   onEdit: handleEdit,
 }) => {
   const rows = useMemo(() => incomingRows.slice(), [incomingRows]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(4);
+
   const { createSortHandler, stableSort, order, orderBy } = useSortTable(
     columns[0].id
   );
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const { tablePagination, page, rowsPerPage } = useTablePagination(rows);
 
   const tableHead = (
     <TableHead>
@@ -141,15 +126,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[4, 8, 16, 32]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+      {tablePagination}
     </Paper>
   );
 };
