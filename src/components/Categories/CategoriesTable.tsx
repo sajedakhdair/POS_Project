@@ -33,7 +33,7 @@ const styles = (theme: Theme) =>
 const CategoriesTable: React.FC<CategoriesTableProps> = ({
   classes,
   columns = [],
-  rows: incomingRows,
+  rows: incomingRows = [],
   onDelete: handleDelete,
   onEdit: handleEdit,
 }) => {

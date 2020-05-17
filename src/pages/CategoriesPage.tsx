@@ -60,9 +60,13 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   ];
 
   const onfetchCategories = () => {
-    fetchCategories().then((data) => {
-      setRows(data);
-    });
+    fetchCategories()
+      .then((data) => {
+        setRows(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const onDelete = async (id: string) => {
