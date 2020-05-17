@@ -26,16 +26,16 @@ const styles = (theme: Theme) =>
 
 const Search: React.FunctionComponent<
   SearchProps & WithStyles<typeof styles>
-> = ({ classes, rows, onSearch }) => {
+> = ({ classes, onSearch }) => {
   const [searchText, setSearchText] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchFieldText = event.target.value;
     setSearchText(searchFieldText);
-    const searchResult = onSearch(rows, searchFieldText);
+    onSearch(searchFieldText);
   };
 
   return (
-      <>
+    <>
       <InputLabel className={classes.searchInputLabel} htmlFor="searchText">
         Search:
       </InputLabel>

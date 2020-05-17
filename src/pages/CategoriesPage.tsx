@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { withStyles, WithStyles } from "@material-ui/core/styles";
 import { createStyles, Theme } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
@@ -47,9 +47,7 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   if (flagForLoggedIn !== "true") history.push("/");
 
   const [rows, setRows] = useState<Category[]>([]);
-  const [copyOfMainRows, setcopyOfMainRows] = useState<Category[]>([]);
   const [name, setName] = useState<string>("");
-  const [result, setResult] = useState<Category[]>([]);
   const columns: Column[] = [
     { id: "name", label: "Name", minWidth: 170, align: "left" },
     {
@@ -63,7 +61,6 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   const onfetchCategories = () => {
     fetchCategories().then((data) => {
       setRows(data);
-      setcopyOfMainRows(data);
     });
   };
 
@@ -84,17 +81,22 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
     return validationStatus;
   };
 
-  const onSearch = (rows: Category[], name: string): Category[] => {
+  const onSearch = (name: string) => {
     setName(name);
-    const result = rows.filter((row) => row.name.includes(name));
-    setResult(result);
-    return result;
   };
 
+  const filteredRows = useMemo(() => {
+    return rows.filter(
+      (row) =>
+        Object.values(row).filter((value) =>
+          value.toString().toLowerCase().includes(name.toLowerCase())
+        ).length !== 0
+    );
+  }, [rows, name]);
+
   useEffect(() => {
-    if (name.length === 0) onfetchCategories();
-    else setRows(result);
-  }, [result, name]);
+    onfetchCategories();
+  }, []);
 
   return (
     <Grid container className={classes.gridContainer}>
@@ -103,7 +105,6 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       </Grid>
       <Grid item xs={6}>
         <Search
-          rows={copyOfMainRows}
           onSearch={onSearch}
           classes={{
             searchTextField: classes.searchTextField,
@@ -115,7 +116,7 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       <Grid item xs={12} className={classes.categoriesTableGrid}>
         <CategoriesTable
           columns={columns}
-          rows={rows}
+          rows={filteredRows}
           onDelete={onDelete}
           onEdit={onEdit}
         />

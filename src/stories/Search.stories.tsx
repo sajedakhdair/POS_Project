@@ -11,11 +11,8 @@ const inputCategory: Category[] = [
   { id: 5, name: "vegetables", date: "2020-05-20 13:23:58" },
 ];
 
-const onSearch = (rows: Category[], searchText: string) => {
-  const result = rows.filter((row) => row.name.includes(searchText));
-  return result;
+const onSearch = (searchText: string) => {
+
 };
 
-storiesOf("Search", module).add("Search", () => (
-  <Search rows={inputCategory} onSearch={onSearch} />
-));
+storiesOf("Search", module).add("Search", () => <Search onSearch={onSearch} />);
