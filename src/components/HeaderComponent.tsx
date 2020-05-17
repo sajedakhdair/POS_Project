@@ -54,7 +54,8 @@ const styles = (theme: Theme) =>
     rightPartOfHeader: {
       display: "flex",
       alignItems: "center",
-      marginLeft: theme.spacing(8),
+      margin: "auto",
+      marginRight: theme.spacing(1),
     },
     languageImg: {
       maxHeight: 35,
