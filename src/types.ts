@@ -1,3 +1,4 @@
+import { WithStyles } from "@material-ui/core/styles/withStyles";
 
 export interface userInformationProps {
     userName: string;
@@ -9,3 +10,33 @@ export interface errorsProps {
     flagForPasswordError: boolean;
     passwordError: string;
 }
+export interface Category {
+    id: number;
+    name: string;
+    date: string;
+}
+
+export interface Column {
+    id: keyof Category;
+    label: string;
+    minWidth?: number;
+    align?: "center" | "left" | "right";
+}
+
+export type TableRows = Category[];
+export interface TableContent {
+    rows: TableRows;
+    columns: Column[];
+}
+export interface Actions {
+    onDelete: Function;
+    onEdit: Function;
+}
+
+export type CategoriesTableProps = TableContent & Actions & WithStyles
+
+export type Order = "asc" | "desc";
+
+export interface SearchProps {
+    onSearch: (searchText: string) => void;
+} 

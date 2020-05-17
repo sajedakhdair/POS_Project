@@ -16,5 +16,42 @@
       "firstName": "Ahmad",
       "lastName": "Khdair"
     }
+  ],
+  "Categories": [
+    {
+      "id": 1,
+      "name": "updatedfruits",
+      "date": "2020-05-29 08:24:29"
+    },
+    {
+      "id": 2,
+      "name": "services",
+      "date": "2020-05-23 23:15:41"
+    },
+    {
+      "id": 3,
+      "name": "computers",
+      "date": "2020-05-07 12:10:34"
+    },
+    {
+      "id": 4,
+      "name": "clothing",
+      "date": "2020-04-28 17:23:11"
+    },
+    {
+      "id": 6,
+      "name": "chocolate",
+      "date": "2020-05-22 15:33:37"
+    },
+    {
+      "id": 7,
+      "name": "cake",
+      "date": "2020-05-19 06:56:22"
+    },
+    {
+      "name": "ice cream",
+      "date": "2020-05-10 05:08:13",
+      "id": 8
+    }
   ]
 }
