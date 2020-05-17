@@ -16,9 +16,7 @@ export const fetchDeleteCategory = (id: string) => {
 export const fetchValidateCategoryName = (name: string): Promise<boolean> => {
     return fetchCategories().then((data) => {
         const result = data.filter(category => category.name === name)
-        if (result.length === 0)
-            return true
-        else return false
+        return (result.length === 0)
     })
 }
 
