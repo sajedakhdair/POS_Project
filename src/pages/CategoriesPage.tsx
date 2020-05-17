@@ -13,6 +13,7 @@ import { fetchEditCategory } from "../apis/fetchCategories";
 import Grid from "@material-ui/core/Grid";
 import CategoryFormDialog from "../components/Categories/CategoryFormDialog";
 import Search from "../components/Search";
+import useSearch from "../customHooks/useSearch";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -85,14 +86,7 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
     setName(name);
   };
 
-  const filteredRows = useMemo(() => {
-    return rows.filter(
-      (row) =>
-        Object.values(row).filter((value) =>
-          value.toString().toLowerCase().includes(name.toLowerCase())
-        ).length !== 0
-    );
-  }, [rows, name]);
+  const filteredRows = useSearch(rows, name);
 
   useEffect(() => {
     onfetchCategories();

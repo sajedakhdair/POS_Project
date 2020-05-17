@@ -22,8 +22,10 @@ export interface Column {
     minWidth?: number;
     align?: "center" | "left" | "right";
 }
+
+export type TableRows = Category[];
 export interface TableContent {
-    rows: Category[];
+    rows: TableRows;
     columns: Column[];
 }
 export interface Actions {
