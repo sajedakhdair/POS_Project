@@ -4,6 +4,7 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import { SearchProps } from "../types";
+import Box from "@material-ui/core/Box";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -12,15 +13,12 @@ const styles = (theme: Theme) =>
       width: theme.spacing(20),
     },
     searchInputLabel: {
-      position: "absolute",
-      top: theme.spacing(6),
-      left: theme.spacing(1),
+      paddingTop: theme.spacing(1),
       fontSize: theme.typography.subtitle1.fontSize,
     },
-    searchTextField: {
-      position: "absolute",
-      top: theme.spacing(4.3),
-      left: theme.spacing(10),
+    searchTextField: {},
+    searchBox: {
+      display: "flex",
     },
   });
 
@@ -35,7 +33,7 @@ const Search: React.FunctionComponent<
   };
 
   return (
-    <>
+    <Box className={classes.searchBox}>
       <InputLabel className={classes.searchInputLabel} htmlFor="searchText">
         Search:
       </InputLabel>
@@ -51,7 +49,7 @@ const Search: React.FunctionComponent<
         label="Enter Search Text"
         size="small"
       />
-    </>
+    </Box>
   );
 };
 

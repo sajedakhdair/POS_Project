@@ -19,22 +19,21 @@ const styles = (theme: Theme) =>
   createStyles({
     gridContainer: {
       backgroundColor: theme.palette.grey[50],
-      paddingTop: theme.spacing(19),
-      paddingBottom: theme.spacing(19),
+      paddingTop: theme.spacing(30),
+      paddingBottom: theme.spacing(40),
       display: "flex",
+      justifyContent: "space-around",
     },
     categoriesTableGrid: {
       margin: theme.spacing(2, 3, 7, 10),
     },
-    searchTextField: {
-      position: "relative",
-      top: theme.spacing(-2),
-      left: theme.spacing(56),
+    searchGrid: {
+      display: "flex",
+      justifyContent: "flex-end",
     },
-    searchInputLabel: {
-      position: "relative",
-      top: theme.spacing(1),
-      left: theme.spacing(42),
+    addCategoryButtonGrid: {
+      display: "flex",
+      justifyContent: "flex-start",
     },
     inputTextHeight: {
       maxHeight: theme.spacing(4),
@@ -98,15 +97,13 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
 
   return (
     <Grid container className={classes.gridContainer}>
-      <Grid item xs={3}>
+      <Grid item xs={3} className={classes.addCategoryButtonGrid}>
         <CategoryFormDialog mode="Create" onSubmit={onAdd} />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={6} className={classes.searchGrid}>
         <Search
           onSearch={onSearch}
           classes={{
-            searchTextField: classes.searchTextField,
-            searchInputLabel: classes.searchInputLabel,
             inputTextHeight: classes.inputTextHeight,
           }}
         />
