@@ -16,6 +16,22 @@ export interface Category {
     date: string;
 }
 
+export interface Product {
+    id: number;
+    name: string;
+    rawPrice: string;
+    price: string;
+    tax: string;
+    code: string;
+    color?: string
+    image?: string
+    category: string
+    description?: string
+    stockCount?: number
+    quantity: number;
+    expirationDate?: string
+}
+
 export interface Column {
     id: keyof Category;
     label: string;
