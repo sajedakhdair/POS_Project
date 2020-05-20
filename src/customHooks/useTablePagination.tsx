@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { TableRows } from "../types";
 import React from "react";
 import TablePagination from "@material-ui/core/TablePagination";
 
-const useTablePagination = (rows: TableRows) => {
+const useTablePagination = <T extends object>(rows: T[]) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);
 

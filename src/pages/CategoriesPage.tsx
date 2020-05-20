@@ -48,7 +48,7 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
 
   const [rows, setRows] = useState<Category[]>([]);
   const [name, setName] = useState<string>("");
-  const columns: Column[] = [
+  const columns: Column<Category>[] = [
     { id: "name", label: "Name", minWidth: 170, align: "left" },
     {
       id: "date",

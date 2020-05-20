@@ -32,24 +32,32 @@ export interface Product {
     expirationDate?: string
 }
 
-export interface Column {
-    id: keyof Category;
+export interface Column<T> {
+    id: keyof T;
     label: string;
     minWidth?: number;
     align?: "center" | "left" | "right";
 }
 
 export type TableRows = Category[];
-export interface TableContent {
-    rows: TableRows;
-    columns: Column[];
+
+export interface TableContent<T> {
+    rows: T[];
+    columns: Column<T>[];
 }
 export interface Actions {
     onDelete: Function;
     onEdit: Function;
 }
+export interface ProductActions {
+    onDelete: Function;
+    onEdit: Function;
+    onViewDetails: Function;
+}
 
-export type CategoriesTableProps = TableContent & Actions & WithStyles
+export type CategoriesTableProps = TableContent<Category> & Actions & WithStyles
+
+export type ProductsTableProps = TableContent<Product> & ProductActions & WithStyles
 
 export type Order = "asc" | "desc";
 
