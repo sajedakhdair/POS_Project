@@ -16,6 +16,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import DescriptionIcon from "@material-ui/icons/Description";
+import DeleteDialog from "../Categories/DeleteDialog";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -114,14 +115,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                       );
                     })}
                     <TableCell key="actions" className={classes.tableCell}>
-                      <IconButton
-                        color="inherit"
-                        onClick={() => {
-                          handleDelete(row.id);
-                        }}
-                      >
-                        <DeleteForeverIcon fontSize="small" />
-                      </IconButton>
+                      <DeleteDialog id={row.id} onDelete={handleDelete} />
                       <IconButton
                         color="inherit"
                         onClick={() => {

@@ -16,9 +16,9 @@ interface Props {
   id: number;
   onDelete: Function;
 }
-type DeleteCategoryDialogProps = Props & WithStyles;
+type DeleteDialogProps = Props & WithStyles;
 
-const DeleteCategoryDialog: React.FunctionComponent<DeleteCategoryDialogProps> = ({
+const DeleteDialog: React.FunctionComponent<DeleteDialogProps> = ({
   classes,
   id,
   onDelete: handleDelete,
@@ -44,7 +44,7 @@ const DeleteCategoryDialog: React.FunctionComponent<DeleteCategoryDialogProps> =
         aria-labelledby="delete-dialog-title"
         aria-describedby="delete-dialog-description"
       >
-        <DialogTitle id="delete-dialog-title">{"Delete Category"}</DialogTitle>
+        <DialogTitle id="delete-dialog-title">Delete</DialogTitle>
         <DialogContent>
           <DialogContentText id="delete-dialog-description">
             Are you sure you want to delete?
@@ -69,4 +69,4 @@ const DeleteCategoryDialog: React.FunctionComponent<DeleteCategoryDialogProps> =
   );
 };
 
-export default withStyles(styles)(DeleteCategoryDialog);
+export default withStyles(styles)(DeleteDialog);

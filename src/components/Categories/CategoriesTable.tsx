@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { withStyles } from "@material-ui/core/styles";
 import { createStyles, Theme } from "@material-ui/core/styles";
-import DeleteCategoryDialog from "./DeleteCategoryDialog";
+import DeleteDialog from "./DeleteDialog";
 import CategoryFormDialog from "./CategoryFormDialog";
 import { CategoriesTableProps } from "../../types";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
@@ -110,10 +110,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
                       );
                     })}
                     <TableCell key="actions" className={classes.tableCell}>
-                      <DeleteCategoryDialog
-                        id={row.id}
-                        onDelete={handleDelete}
-                      />
+                      <DeleteDialog id={row.id} onDelete={handleDelete} />
                       <CategoryFormDialog
                         mode="Edit"
                         category={row}
