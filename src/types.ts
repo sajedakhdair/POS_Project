@@ -63,4 +63,8 @@ export type Order = "asc" | "desc";
 
 export interface SearchProps {
     onSearch: (searchText: string) => void;
+}
+
+export interface FilterByDateProps {
+    onFilterByDate: (selectedFirstDate: Date | null, selectedSecondDate: Date | null) => void;
 } 
