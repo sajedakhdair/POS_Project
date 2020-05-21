@@ -4,8 +4,9 @@ import LoginPage from "../src/pages/LoginPage";
 import MainPage from "../src/pages/MainPage";
 import CategoriesPage from "../src/pages/CategoriesPage";
 import HeaderComponent from "../src/components/HeaderComponent";
-
 import "./App.css";
+import ProductsPage from "../src/pages/ProductsPage";
+
 function App() {
   return (
     <div className="App">
@@ -15,10 +16,8 @@ function App() {
             <Route exact path="/" component={LoginPage} />
             <Fragment>
               <HeaderComponent />
-              <Route
-                path="/CategoriesPage"
-                component={CategoriesPage}
-              />
+              <Route path="/CategoriesPage" component={CategoriesPage} />
+              <Route path="/ProductsPage" component={ProductsPage} />
               <Route exact path="/MainPage" component={MainPage} />
             </Fragment>
           </Switch>

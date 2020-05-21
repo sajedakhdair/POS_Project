@@ -105,7 +105,7 @@ const HeaderComponent: React.FunctionComponent<WithStyles<typeof styles>> = (
             POS
           </Link>
           <Link
-            href="#"
+            href="/ProductsPage"
             color="inherit"
             underline="none"
             className={classes.linkItem}
