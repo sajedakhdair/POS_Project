@@ -9,6 +9,7 @@ import { fetchProducts, fetchDeleteProduct } from "../apis/fetchProducts";
 import Search from "../components/Search";
 import useSearch from "../customHooks/useSearch";
 import Button from "@material-ui/core/Button";
+import FilterByDate from "../components/Products/FilterByDate";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -17,6 +18,7 @@ const styles = (theme: Theme) =>
       paddingTop: theme.spacing(30),
       paddingBottom: theme.spacing(40),
       display: "flex",
+      flexDirection: "column",
       justifyContent: "space-around",
     },
     productsTableGrid: { margin: theme.spacing(2, 3, 7, 10) },
@@ -32,6 +34,21 @@ const styles = (theme: Theme) =>
       display: "flex",
       justifyContent: "flex-start",
       textTransform: "none",
+    },
+    buttonAndSearchGrid: {
+      display: "flex",
+      justifyContent: "space-around",
+      textTransform: "none",
+      margin: theme.spacing(4, 0, 0, 0),
+    },
+    filterByDateGrid: {
+      display: "flex",
+      justifyContent: "flex-end",
+      margin: "auto",
+      marginRight: "6vw",
+    },
+    typography: {
+      color: theme.palette.grey[600],
     },
   });
 
@@ -85,6 +102,12 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   const onSearch = (searchText: string) => {
     setSearchText(searchText);
   };
+
+  const onFilterByDate = (
+    selectedFirstDate: Date | null,
+    selectedSecondDate: Date | null
+  ) => {};
+
   const filteredRows = useSearch(rows, columns, searchText);
 
   useEffect(() => {
@@ -93,22 +116,32 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
 
   return (
     <Grid container className={classes.gridContainer}>
-      <Grid item xs={3}>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.addProductButton}
-        >
-          Add Product
-        </Button>
-      </Grid>
-      <Grid item xs={6} className={classes.searchGrid}>
-        <Search
-          onSearch={onSearch}
+      <Grid item xs={8} className={classes.filterByDateGrid}>
+        <FilterByDate
+          onFilterByDate={onFilterByDate}
           classes={{
-            inputTextHeight: classes.inputTextHeight,
+            typography: classes.typography,
           }}
         />
+      </Grid>
+      <Grid className={classes.buttonAndSearchGrid}>
+        <Grid item xs={3}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.addProductButton}
+          >
+            Add Product
+          </Button>
+        </Grid>
+        <Grid item xs={6} className={classes.searchGrid}>
+          <Search
+            onSearch={onSearch}
+            classes={{
+              inputTextHeight: classes.inputTextHeight,
+            }}
+          />
+        </Grid>
       </Grid>
       <Grid item xs={12} className={classes.productsTableGrid}>
         <ProductsTable
