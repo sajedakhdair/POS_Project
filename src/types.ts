@@ -39,8 +39,6 @@ export interface Column<T> {
     align?: "center" | "left" | "right";
 }
 
-export type TableRows = Category[];
-
 export interface TableContent<T> {
     rows: T[];
     columns: Column<T>[];
