@@ -10,6 +10,7 @@ import Search from "../components/Search";
 import useSearch from "../customHooks/useSearch";
 import Button from "@material-ui/core/Button";
 import FilterByDate from "../components/Products/FilterByDate";
+import useFilterByDate from "../customHooks/useFilterByDate";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -59,6 +60,8 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
 
   const [rows, setRows] = useState<Product[]>([]);
   const [searchText, setSearchText] = useState("");
+  const [firstDate, setFirstDate] = React.useState<Date | null>(null);
+  const [secondDate, setSecondDate] = React.useState<Date | null>(null);
   const columns: Column<Product>[] = [
     { id: "code", label: "Code", minWidth: 1 },
     {
@@ -106,9 +109,14 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   const onFilterByDate = (
     selectedFirstDate: Date | null,
     selectedSecondDate: Date | null
-  ) => {};
+  ) => {
+    setFirstDate(selectedFirstDate);
+    setSecondDate(selectedSecondDate);
+  };
 
-  const filteredRows = useSearch(rows, columns, searchText);
+  const filteredRowsByDate = useFilterByDate(rows, firstDate, secondDate);
+
+  const filteredRows = useSearch(filteredRowsByDate, columns, searchText);
 
   useEffect(() => {
     onfetchProducts();
