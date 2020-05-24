@@ -85,7 +85,7 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   const onSearch = (searchText: string) => {
     setSearchText(searchText);
   };
-  const filteredRows = useSearch(rows, searchText);
+  const filteredRows = useSearch(rows, columns, searchText);
 
   useEffect(() => {
     onfetchProducts();

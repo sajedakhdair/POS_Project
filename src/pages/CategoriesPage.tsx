@@ -89,7 +89,7 @@ const CategoriesPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
     setName(name);
   };
 
-  const filteredRows = useSearch(rows, name);
+  const filteredRows = useSearch(rows, columns, name);
 
   useEffect(() => {
     onfetchCategories();
