@@ -44,11 +44,11 @@ export interface TableContent<T> {
     columns: Column<T>[];
 }
 export interface Actions {
-    onDelete: Function;
-    onEdit: Function;
+    onDelete: (id: string) => void;
+    onEdit: (category: Category, name: string) => void;
 }
 export interface ProductActions {
-    onDelete: Function;
+    onDelete: (id: string) => void;
     onEdit: Function;
     onViewDetails: Function;
 }
