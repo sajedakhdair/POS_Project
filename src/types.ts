@@ -50,7 +50,6 @@ export interface Actions {
 export interface ProductActions {
     onDelete: (id: string) => void;
     onEdit: Function;
-    onViewDetails: Function;
 }
 
 export type CategoriesTableProps = TableContent<Category> & Actions & WithStyles

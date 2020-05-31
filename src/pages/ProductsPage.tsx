@@ -162,7 +162,6 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
           rows={filteredRows}
           onDelete={onDelete}
           onEdit={onEdit}
-          onViewDetails={onViewDetails}
         />
       </Grid>
     </Grid>

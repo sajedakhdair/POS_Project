@@ -38,7 +38,6 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
   rows: incomingRows = [],
   onDelete: handleDelete,
   onEdit: handleEdit,
-  onViewDetails: handleViewDetails,
 }) => {
   const { createSortHandler, stableSort, order, orderBy } = useSortTable(
     columns[0].id
