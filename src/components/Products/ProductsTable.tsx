@@ -16,7 +16,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import DescriptionIcon from "@material-ui/icons/Description";
-import DeleteDialog from "../Categories/DeleteDialog";
+import DeleteDialog from "../DeleteDialog";
 
 const styles = (theme: Theme) =>
   createStyles({

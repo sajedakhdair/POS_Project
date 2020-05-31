@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { withStyles } from "@material-ui/core/styles";
 import { createStyles, Theme } from "@material-ui/core/styles";
-import DeleteDialog from "./DeleteDialog";
+import DeleteDialog from "../DeleteDialog";
 import CategoryFormDialog from "./CategoryFormDialog";
 import { CategoriesTableProps } from "../../types";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
