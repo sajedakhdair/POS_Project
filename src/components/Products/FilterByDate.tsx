@@ -29,7 +29,7 @@ const styles = (theme: Theme) =>
       margin: theme.spacing(2, 0, 0, 0),
     },
   });
-
+export const dateFormat: string = "yyyy-MM-dd";
 const FilterByDate: React.FunctionComponent<
   FilterByDateProps & WithStyles<typeof styles>
 > = ({ classes, onFilterByDate: handleFilterByDate }) => {
@@ -41,7 +41,7 @@ const FilterByDate: React.FunctionComponent<
     setSelectedSecondDate,
   ] = React.useState<Date | null>(null);
 
-  const handleFirsDateChange = (date: Date | null) => {
+  const handleFirstDateChange = (date: Date | null) => {
     setSelectedFirstDate(date);
   };
 
@@ -57,12 +57,12 @@ const FilterByDate: React.FunctionComponent<
           className={classes.datePicker}
           disableToolbar
           variant="inline"
-          format="yyyy-MM-dd"
+          format={dateFormat}
           margin="normal"
           id="fromDate"
           label="From"
           value={selectedFirstDate}
-          onChange={handleFirsDateChange}
+          onChange={handleFirstDateChange}
           KeyboardButtonProps={{
             "aria-label": "change date",
           }}
