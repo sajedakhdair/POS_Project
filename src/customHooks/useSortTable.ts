@@ -19,18 +19,36 @@ const useSortTable = (initialOrderBy: any) => {
         handleRequestSort(event, property);
     };
 
-    const stableSort = <T>(array: T[], order: Order, orderBy: keyof T) => {
-        return array.sort((a: T, b: T) => {
-            if (order == "desc")
-                return a[orderBy] < b[orderBy]
-                    ? 1 : -1;
-            else
-                return a[orderBy] > b[orderBy]
-                    ? 1 : -1;
-
-        });
+    const sort = <T>(order: Order, first: T, second: T) => {
+        if (order == "desc")
+            return first < second
+                ? 1 : -1;
+        else
+            return first > second
+                ? 1 : -1;
     }
 
+    const removeSymbols = (sentence: string): string => {
+        const regex: RegExp = /\$|\%|\-/g;
+        return sentence.replace(regex, '');
+    }
+
+    const stableSort = <T>(array: T[], order: Order, orderBy: keyof T) => {
+        return array.sort((a: T, b: T) => {
+            let firstValue = a[orderBy];
+            let secondValue = b[orderBy];
+            if (typeof firstValue === "string" && typeof secondValue === "string") {
+                if (firstValue.match(/^[0-9]+/)) {
+                    return sort(order, Number(removeSymbols(firstValue)),
+                        Number(removeSymbols(secondValue)))
+                }
+                else return sort(order, firstValue.toLowerCase(),
+                    secondValue.toLowerCase())
+            }
+            return sort(order, a[orderBy],
+                b[orderBy])
+        });
+    }
     const returnValues = { createSortHandler, stableSort, order, orderBy }
 
     return returnValues

@@ -12,7 +12,7 @@ const inputCategory: Category[] = [
   { id: 4, name: "clothing", date: "2020-04-28 17:23:11" },
   { id: 5, name: "vegetables", date: "2020-05-20 13:23:58" },
 ];
-const cateogryTableColumns: Column[] = [
+const cateogryTableColumns: Column<Category>[] = [
   { id: "name", label: "Name", minWidth: 170, align: "left" },
   {
     id: "date",

@@ -8,12 +8,14 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { withStyles } from "@material-ui/core/styles";
 import { createStyles, Theme } from "@material-ui/core/styles";
-import DeleteDialog from "../DeleteDialog";
-import CategoryFormDialog from "./CategoryFormDialog";
-import { CategoriesTableProps } from "../../types";
+import { ProductsTableProps } from "../../types";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import useSortTable from "../../customHooks/useSortTable";
 import useTablePagination from "../../customHooks/useTablePagination";
+import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteDialog from "../DeleteDialog";
+import ProductDetailsDiaolg from "./ProductDetailsDiaolg";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -24,26 +26,35 @@ const styles = (theme: Theme) =>
       maxHeight: 280,
     },
     tableCell: {
-      minWidth: 170,
+      width: 120,
       align: "left",
-      padding: theme.spacing(0.2, 0.5, 0.2, 1.5),
+      padding: theme.spacing(0.1, 0, 0.1, 2),
     },
   });
 
-const CategoriesTable: React.FC<CategoriesTableProps> = ({
+const ProductsTable: React.FC<ProductsTableProps> = ({
   classes,
   columns = [],
   rows: incomingRows = [],
   onDelete: handleDelete,
   onEdit: handleEdit,
 }) => {
-  const rows = useMemo(() => incomingRows.slice(), [incomingRows]);
-
   const { createSortHandler, stableSort, order, orderBy } = useSortTable(
     columns[0].id
   );
 
-  const { tablePagination, page, rowsPerPage } = useTablePagination(rows);
+  const { tablePagination, page, rowsPerPage } = useTablePagination(
+    incomingRows
+  );
+
+  const rows = useMemo(
+    () =>
+      stableSort(incomingRows.slice(), order, orderBy).slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [incomingRows, order, orderBy, page, rowsPerPage]
+  );
 
   const tableHead = (
     <TableHead>
@@ -52,7 +63,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
           <TableCell
             key={column.id}
             align={column.align}
-            style={{ minWidth: column.minWidth }}
+            style={{ width: column.minWidth }}
           >
             <TableSortLabel
               active={orderBy === column.id}
@@ -92,34 +103,37 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
         <Table stickyHeader aria-label="sticky table">
           {tableHead}
           <TableBody>
-            {stableSort(rows, order, orderBy)
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          className={classes.tableCell}
-                        >
-                          {value}
-                        </TableCell>
-                      );
-                    })}
-                    <TableCell key="actions" className={classes.tableCell}>
-                      <DeleteDialog id={row.id} onDelete={handleDelete} />
-                      <CategoryFormDialog
-                        mode="Edit"
-                        category={row}
-                        onSubmit={handleEdit}
-                      />
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+            {rows.map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        className={classes.tableCell}
+                        style={{ width: column.minWidth }}
+                      >
+                        {value}
+                      </TableCell>
+                    );
+                  })}
+                  <TableCell key="actions" className={classes.tableCell}>
+                    <DeleteDialog id={row.id} onDelete={handleDelete} />
+                    <IconButton
+                      color="inherit"
+                      onClick={() => {
+                        handleEdit(row);
+                      }}
+                    >
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+                    <ProductDetailsDiaolg product={row} />
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -127,4 +141,4 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({
     </Paper>
   );
 };
-export default withStyles(styles)(CategoriesTable);
+export default withStyles(styles)(ProductsTable);
