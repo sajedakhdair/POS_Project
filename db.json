@@ -62,6 +62,7 @@
       "price": "30.00$",
       "tax": "18%",
       "code": "856512",
+      "image": "Kiwi.jpg",
       "category": "Fruits",
       "quantity": 7,
       "expirationDate": "2020-06-10"
@@ -95,6 +96,7 @@
       "price": "20.00$",
       "tax": "3%",
       "code": "115239",
+      "image": "BonOBon.jpg",
       "category": "chocolate",
       "description": "Chocolate with peanut Cream",
       "quantity": 100,
@@ -107,6 +109,7 @@
       "price": "350.00$",
       "tax": "12%",
       "code": "126547",
+      "image": "computerRepair.jpeg",
       "category": "services",
       "quantity": 10,
       "expirationDate": "2020-09-23"

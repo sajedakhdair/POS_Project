@@ -13,10 +13,9 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import useSortTable from "../../customHooks/useSortTable";
 import useTablePagination from "../../customHooks/useTablePagination";
 import IconButton from "@material-ui/core/IconButton";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
-import DescriptionIcon from "@material-ui/icons/Description";
 import DeleteDialog from "../DeleteDialog";
+import ProductDetailsDiaolg from "./ProductDetailsDiaolg";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -131,14 +130,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                     >
                       <EditIcon fontSize="small" />
                     </IconButton>
-                    <IconButton
-                      color="inherit"
-                      onClick={() => {
-                        handleViewDetails(row);
-                      }}
-                    >
-                      <DescriptionIcon fontSize="small" />
-                    </IconButton>
+                    <ProductDetailsDiaolg product={row} />
                   </TableCell>
                 </TableRow>
               );
