@@ -9,8 +9,8 @@ import { fetchProducts, fetchDeleteProduct } from "../apis/fetchProducts";
 import Search from "../components/Search";
 import useSearch from "../customHooks/useSearch";
 import Button from "@material-ui/core/Button";
-import FilterByDate from "../components/Products/FilterByDate";
-import useFilterByDate from "../customHooks/useFilterByDate";
+import FilterByExpirationDate from "../components/Products/FilterByExpirationDate";
+import useFilterByExpirationDate from "../customHooks/useFilterByExpirationDate";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -119,7 +119,7 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
     setSecondDate(selectedSecondDate);
   };
 
-  const filteredRowsByDate = useFilterByDate(rows, firstDate, secondDate);
+  const filteredRowsByDate = useFilterByExpirationDate(rows, firstDate, secondDate);
 
   const filteredRows = useSearch(filteredRowsByDate, columns, searchText);
 
@@ -130,7 +130,7 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   return (
     <Grid container className={classes.gridContainer}>
       <Grid item xs={8} className={classes.filterByDateGrid}>
-        <FilterByDate
+        <FilterByExpirationDate
           onFilterByDate={onFilterByDate}
           classes={{
             typography: classes.typography,

@@ -89,6 +89,5 @@ storiesOf("Table", module).add("ProductsTable", () => (
     rows={inputProduct}
     onDelete={action("Delete Button clicked")}
     onEdit={action("Edit Button clicked")}
-    onViewDetails={action("ViewDetails Button clicked")}
   />
 ));

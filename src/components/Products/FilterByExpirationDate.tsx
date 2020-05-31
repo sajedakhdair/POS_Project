@@ -30,7 +30,7 @@ const styles = (theme: Theme) =>
     },
   });
 export const dateFormat: string = "yyyy-MM-dd";
-const FilterByDate: React.FunctionComponent<
+const FilterByExpirationDate: React.FunctionComponent<
   FilterByDateProps & WithStyles<typeof styles>
 > = ({ classes, onFilterByDate: handleFilterByDate }) => {
   const [selectedFirstDate, setSelectedFirstDate] = React.useState<Date | null>(
@@ -96,4 +96,4 @@ const FilterByDate: React.FunctionComponent<
   );
 };
 
-export default withStyles(styles)(FilterByDate);
+export default withStyles(styles)(FilterByExpirationDate);
