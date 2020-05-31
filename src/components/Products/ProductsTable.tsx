@@ -41,13 +41,22 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
   onEdit: handleEdit,
   onViewDetails: handleViewDetails,
 }) => {
-  const rows = useMemo(() => incomingRows.slice(), [incomingRows]);
-
   const { createSortHandler, stableSort, order, orderBy } = useSortTable(
     columns[0].id
   );
 
-  const { tablePagination, page, rowsPerPage } = useTablePagination(rows);
+  const { tablePagination, page, rowsPerPage } = useTablePagination(
+    incomingRows
+  );
+
+  const rows = useMemo(
+    () =>
+      stableSort(incomingRows.slice(), order, orderBy).slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [incomingRows, order, orderBy, page, rowsPerPage]
+  );
 
   const tableHead = (
     <TableHead>
@@ -96,46 +105,44 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
         <Table stickyHeader aria-label="sticky table">
           {tableHead}
           <TableBody>
-            {stableSort(rows, order, orderBy)
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          className={classes.tableCell}
-                          style={{ width: column.minWidth }}
-                        >
-                          {value}
-                        </TableCell>
-                      );
-                    })}
-                    <TableCell key="actions" className={classes.tableCell}>
-                      <DeleteDialog id={row.id} onDelete={handleDelete} />
-                      <IconButton
-                        color="inherit"
-                        onClick={() => {
-                          handleEdit(row);
-                        }}
+            {rows.map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                        className={classes.tableCell}
+                        style={{ width: column.minWidth }}
                       >
-                        <EditIcon fontSize="small" />
-                      </IconButton>
-                      <IconButton
-                        color="inherit"
-                        onClick={() => {
-                          handleViewDetails(row);
-                        }}
-                      >
-                        <DescriptionIcon fontSize="small" />
-                      </IconButton>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                        {value}
+                      </TableCell>
+                    );
+                  })}
+                  <TableCell key="actions" className={classes.tableCell}>
+                    <DeleteDialog id={row.id} onDelete={handleDelete} />
+                    <IconButton
+                      color="inherit"
+                      onClick={() => {
+                        handleEdit(row);
+                      }}
+                    >
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+                    <IconButton
+                      color="inherit"
+                      onClick={() => {
+                        handleViewDetails(row);
+                      }}
+                    >
+                      <DescriptionIcon fontSize="small" />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
