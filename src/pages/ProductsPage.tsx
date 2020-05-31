@@ -75,10 +75,15 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       label: "Description",
       minWidth: 1,
     },
-    { id: "tax", label: "tax (%)", minWidth: 1 },
+    { id: "tax", label: "tax(%)", minWidth: 1 },
     {
       id: "price",
       label: "Price",
+      minWidth: 1,
+    },
+    {
+      id: "expirationDate",
+      label: "Expiration Date",
       minWidth: 1,
     },
   ];
