@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import DeleteCategoryDialog from "../../components/Categories/DeleteDialog";
+import DeleteCategoryDialog from "../../components/DeleteDialog";
 import { action } from "@storybook/addon-actions";
 import CategoryFormDialog from "../../components/Categories/CategoryFormDialog";
 import { Theme, createStyles } from "@material-ui/core";
