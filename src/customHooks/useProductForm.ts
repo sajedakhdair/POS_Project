@@ -8,6 +8,9 @@ import { fetchGetProductById } from "../apis/fetchProducts";
 const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [selectedProduct, setSelectedProduct] = useState<Product>();
+    const [disabledButton, setDisabledButton] = useState(false);
+    const [circularProgress, setCircularProgress] = useState(false);
+
     useEffect(() => {
         fetchCategories()
             .then((data) => {
@@ -60,21 +63,37 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         event.preventDefault();
         const productFormErrors: ProductFormErrors = checkProductInformation(productInformation);
         const hasErrors: boolean = isThereAnyProductError(productFormErrors);
+        let productCodeValidationStatus: boolean;
         if (!hasErrors) {
-            if (id)
-                onSubmit(selectedProduct, productInformation)
-            else
-                onSubmit(productInformation)
-            onClose();
+            setDisabledButton(true);
+            if (id) {
+                productCodeValidationStatus = await onSubmit(selectedProduct, productInformation)
+            }
+            else {
+                productCodeValidationStatus = await onSubmit(productInformation)
+            }
+            if (productCodeValidationStatus) {
+                setCircularProgress(true);
+                setTimeout(() => {
+                    onClose();
+                }, 3000);
+            }
+            else {
+                setErrors({ ...productFormErrors, codeError: "product code must be unique" })
+                console.log(productFormErrors)
+                setCircularProgress(false);
+                setDisabledButton(false);
+                onClose();
+            }
         }
         else {
             setErrors(productFormErrors)
         };
-    };
+    }
 
     const returnValues = {
         handleChange, handleSubmit,
-        productInformation, setValues, errors, categories
+        productInformation, setValues, errors, categories, disabledButton, circularProgress,
     }
     return returnValues
 };

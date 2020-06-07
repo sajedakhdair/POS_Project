@@ -19,6 +19,8 @@ import {
 } from "@material-ui/pickers";
 import { dateFormat } from "../Products/FilterByExpirationDate";
 import TextField from "@material-ui/core/TextField";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 const styles = (theme: Theme) =>
   createStyles({
     boxForm: {
@@ -46,6 +48,12 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing(2),
     },
     button: { textTransform: "none", marginRight: theme.spacing(2) },
+    circularProgress: {
+      left: "45%",
+      top: "50%",
+      color: theme.palette.primary.dark,
+      size: "20px",
+    },
   });
 
 interface Props {
@@ -68,6 +76,8 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
     setValues,
     errors,
     categories,
+    disabledButton,
+    circularProgress,
   } = useProductForm(onSubmit, onClose, id);
 
   return (
@@ -241,6 +251,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
             Cancel
           </Button>
           <Button
+            disabled={disabledButton}
             color="primary"
             variant="contained"
             className={classes.button}
@@ -248,6 +259,9 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           >
             Submit
           </Button>
+          {circularProgress && (
+            <CircularProgress className={classes.circularProgress} />
+          )}
         </Box>
       </Box>
     </form>
