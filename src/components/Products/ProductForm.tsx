@@ -20,6 +20,7 @@ import {
 import { dateFormat } from "../Products/FilterByExpirationDate";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import CloseConfirmation from "../Products/CloseConfirmation";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -241,15 +242,10 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
         </MuiPickersUtilsProvider>
         <Divider />
         <Box className={classes.buttonsBox}>
-          <Button
-            variant="contained"
-            className={classes.button}
-            onClick={() => {
-              onClose();
-            }}
-          >
-            Cancel
-          </Button>
+          <CloseConfirmation
+            onClose={onClose}
+            classes={{ button: classes.button }}
+          />
           <Button
             disabled={disabledButton}
             color="primary"
