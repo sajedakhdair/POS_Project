@@ -1,4 +1,4 @@
-import { userInformationProps } from "./types";
+import { userInformationProps, ProductFormErrors, Product } from "./types";
 import { errorsProps } from "./types";
 
 //******login component******
@@ -53,4 +53,51 @@ export const formatDate = () => {
         + appendLeadingZeroes(currentDateTime.getMinutes()) + ":"
         + appendLeadingZeroes(currentDateTime.getSeconds())
     return formattedDate;
+}
+
+// ** Product component **
+export const checkProductInformation = (productInformation: any): ProductFormErrors => {
+    let errors: ProductFormErrors =
+    {
+        nameError: "",
+        rawPriceError: "",
+        priceError: "",
+        codeError: "",
+        categoryError: "",
+        expirationDateError: "",
+        stockCountError: ""
+    }
+
+    const { name, rawPrice, price, tax, category, code } = productInformation
+
+    if (name.length === 0 || name === "Name")
+        errors.nameError = "Name is required"
+    if (rawPrice === 0 || rawPrice.length === 0)
+        errors.rawPriceError = "Raw Price is required"
+    if (price === 0 || price.length === 0)
+        errors.priceError = "Price is required"
+    else if (price <= 0)
+        errors.priceError = "Price should be more than 0";
+    else if (price <= rawPrice)
+        errors.priceError = "Price should be more than the raw price";
+    if (code === "000000" || code.length === 0)
+        errors.codeError = "Code is required"
+    if (category.length === 0 || category === "Category")
+        errors.categoryError = "Category is required"
+    if (new Date(productInformation.expirationDate) < new Date())
+        errors.expirationDateError = "Expiration Date should be more than date of today";
+    if (isNaN(productInformation.stockCount))
+        errors.stockCountError = "Stock Count should be a number"
+    return ((errors));
+
+}
+
+export const isThereAnyProductError = (errors: ProductFormErrors): boolean => {
+    if (!errors.nameError && !errors.rawPriceError &&
+        !errors.priceError && !errors.codeError &&
+        !errors.categoryError && !errors.stockCountError
+        && !errors.expirationDateError) {
+        return false
+    }
+    else return true
 }
