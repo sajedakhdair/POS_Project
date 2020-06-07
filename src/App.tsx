@@ -6,6 +6,7 @@ import CategoriesPage from "../src/pages/CategoriesPage";
 import HeaderComponent from "../src/components/HeaderComponent";
 import "./App.css";
 import ProductsPage from "../src/pages/ProductsPage";
+import EditProductPage from "../src/pages/EditProductPage";
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
               <HeaderComponent />
               <Route path="/CategoriesPage" component={CategoriesPage} />
               <Route path="/ProductsPage" component={ProductsPage} />
+              <Route
+                path="/products/:id/edit"
+                component={EditProductPage}
+              />
               <Route exact path="/MainPage" component={MainPage} />
             </Fragment>
           </Switch>
