@@ -5,6 +5,7 @@ import { useHistory, RouteComponentProps, Router } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import ProductForm from "../components/Products/ProductForm";
 import { Product } from "../types";
+import { fetchEditProduct } from "../apis/fetchProducts";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -42,7 +43,16 @@ const EditProductPage: React.FC<Props & WithStyles<typeof styles>> = ({
     history.push("/ProductsPage");
   };
 
-  const handleEdit = async (editedProduct: Product) => {};
+  const handleEdit = async (
+    selectedProduct: Product,
+    editedProduct: Product
+  ) => {
+    const validationStatus = await fetchEditProduct(
+      selectedProduct,
+      editedProduct
+    );
+    return validationStatus;
+  };
 
   return (
     <>

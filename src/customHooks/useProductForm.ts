@@ -3,9 +3,11 @@ import { ProductFormErrors, Category, Product } from "../types";
 import { checkProductInformation, isThereAnyProductError } from "../utils"
 import React from "react";
 import { fetchCategories } from "../apis/fetchCategories";
+import { fetchGetProductById } from "../apis/fetchProducts";
 
 const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     const [categories, setCategories] = useState<Category[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<Product>();
     useEffect(() => {
         fetchCategories()
             .then((data) => {
@@ -14,6 +16,14 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
             .catch((error) => {
                 console.error(error);
             });
+        if (id) {
+            fetchGetProductById(id).then((data) => {
+                setSelectedProduct(data)
+                setValues(data);
+            }).catch((error) => {
+                console.error(error);
+            })
+        }
     }, []);
 
     const [productInformation, setValues] = useState<Product>({
@@ -51,7 +61,10 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         const productFormErrors: ProductFormErrors = checkProductInformation(productInformation);
         const hasErrors: boolean = isThereAnyProductError(productFormErrors);
         if (!hasErrors) {
-            onSubmit(productInformation)
+            if (id)
+                onSubmit(selectedProduct, productInformation)
+            else
+                onSubmit(productInformation)
             onClose();
         }
         else {
