@@ -39,6 +39,7 @@ const styles = (theme: Theme) =>
       flexDirection: "column",
       justifyContent: "flex-start",
     },
+    imageLabel: {},
     buttonsBox: {
       display: "flex",
       justifyContent: "flex-end",
@@ -140,7 +141,9 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           </FormHelperText>
         </FormControl>
         <Box className={classes.imageBox}>
-          <label htmlFor="button-image">Image</label>
+          <label htmlFor="button-image" className={classes.imageLabel}>
+            Image
+          </label>
           <input
             accept="image/*"
             id="button-image"
