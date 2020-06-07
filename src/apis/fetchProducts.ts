@@ -11,3 +11,25 @@ export const fetchDeleteProduct = (id: string) => {
         method: "DELETE",
     }).then((response) => response.json())
 };
+
+export const fetchValidateProductCode = (code: string): Promise<boolean> => {
+    return fetchProducts().then((data) => {
+        const result = data.filter(product => product.code === code)
+        return (result.length === 0)
+    })
+}
+
+export const fetchAddProduct = (product: Product) => {
+    return fetchValidateProductCode(product.code).then((result) => {
+        if (result === true) {
+            fetch(`${baseProductsUrl}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(product)
+            }).then((response) => response.json())
+        }
+        return result
+    })
+}

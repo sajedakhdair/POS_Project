@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { Product, Column } from "../types";
 import ProductsTable from "../components/Products/ProductsTable";
-import { fetchProducts, fetchDeleteProduct } from "../apis/fetchProducts";
+import { fetchProducts, fetchDeleteProduct, fetchAddProduct } from "../apis/fetchProducts";
 import Search from "../components/Search";
 import useSearch from "../customHooks/useSearch";
 import FilterByExpirationDate from "../components/Products/FilterByExpirationDate";
@@ -105,8 +105,11 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
 
   const onEdit = (selectedProduct: Product) => {};
 
-  const onAdd = (product: any) => {};
-
+  const onAdd = async (product: any) => {
+    const validationStatus = await fetchAddProduct(product);
+    onfetchProducts();
+    return validationStatus;
+  };
   const onSearch = (searchText: string) => {
     setSearchText(searchText);
   };

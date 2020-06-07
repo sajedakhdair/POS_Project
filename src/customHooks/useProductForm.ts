@@ -14,7 +14,7 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
             .catch((error) => {
                 console.error(error);
             });
-    }, []); 
+    }, []);
 
     const [productInformation, setValues] = useState<Product>({
         id: 0,
@@ -51,6 +51,8 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         const productFormErrors: ProductFormErrors = checkProductInformation(productInformation);
         const hasErrors: boolean = isThereAnyProductError(productFormErrors);
         if (!hasErrors) {
+            onSubmit(productInformation)
+            onClose();
         }
         else {
             setErrors(productFormErrors)
