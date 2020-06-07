@@ -8,9 +8,9 @@ import ProductsTable from "../components/Products/ProductsTable";
 import { fetchProducts, fetchDeleteProduct } from "../apis/fetchProducts";
 import Search from "../components/Search";
 import useSearch from "../customHooks/useSearch";
-import Button from "@material-ui/core/Button";
 import FilterByExpirationDate from "../components/Products/FilterByExpirationDate";
 import useFilterByExpirationDate from "../customHooks/useFilterByExpirationDate";
+import ProductFormDialog from "../components/Products/ProductFormDialog";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -105,7 +105,7 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
 
   const onEdit = (selectedProduct: Product) => {};
 
-  const onViewDetails = (selectedProduct: Product) => {};
+  const onAdd = (product: any) => {};
 
   const onSearch = (searchText: string) => {
     setSearchText(searchText);
@@ -119,7 +119,11 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
     setSecondDate(selectedSecondDate);
   };
 
-  const filteredRowsByDate = useFilterByExpirationDate(rows, firstDate, secondDate);
+  const filteredRowsByDate = useFilterByExpirationDate(
+    rows,
+    firstDate,
+    secondDate
+  );
 
   const filteredRows = useSearch(filteredRowsByDate, columns, searchText);
 
@@ -139,13 +143,10 @@ const ProductsPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       </Grid>
       <Grid className={classes.buttonAndSearchGrid}>
         <Grid item xs={3}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.addProductButton}
-          >
-            Add Product
-          </Button>
+          <ProductFormDialog
+            classes={{ button: classes.addProductButton }}
+            onSubmit={onAdd}
+          />
         </Grid>
         <Grid item xs={6} className={classes.searchGrid}>
           <Search
