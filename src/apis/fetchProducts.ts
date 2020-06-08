@@ -1,4 +1,5 @@
 import { Product } from "../types";
+import { formatPrice } from "../utils";
 const baseProductsUrl = "http://localhost:3001/Products"
 
 export const fetchProducts = (): Promise<Product[]> => {
@@ -27,7 +28,10 @@ export const fetchAddProduct = (product: Product) => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(product)
+                body: JSON.stringify({
+                    ...product, price: formatPrice(product.price),
+                    rawPrice: formatPrice(product.rawPrice)
+                })
             }).then((response) => response.json())
         }
         return result

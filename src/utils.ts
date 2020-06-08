@@ -107,3 +107,7 @@ export const isThereAnyProductError = (errors: ProductFormErrors): boolean => {
     }
     else return true
 }
+
+export const formatPrice = (price: string): string => {
+    return Number(price).toFixed(2) + '$'
+}
