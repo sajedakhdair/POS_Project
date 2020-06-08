@@ -69,6 +69,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
   const {
     handleChange,
     handleSubmit,
+    handleUploadImage,
     productInformation,
     setValues,
     errors,
@@ -154,7 +155,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
             multiple
             type="file"
             name="image"
-            onChange={handleChange}
+            onChange={handleUploadImage}
           />
         </Box>
         <FormControl

@@ -10,7 +10,8 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     const [selectedProduct, setSelectedProduct] = useState<Product>();
     const [disabledButton, setDisabledButton] = useState(false);
     const [circularProgress, setCircularProgress] = useState(false);
-
+    const [imgSource, setImagSource] = useState<any>();
+    
     useEffect(() => {
         fetchCategories()
             .then((data) => {
@@ -59,6 +60,19 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         setValues({ ...productInformation, [name]: value });
     };
 
+    const handleUploadImage = (event: any) => {
+        let file = event.target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = function () {
+            setImagSource(reader.result);
+        }
+    }
+
+    useEffect(() => {
+        setValues({ ...productInformation, image: `${imgSource}` })
+    }, [imgSource])
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const productFormErrors: ProductFormErrors = checkProductInformation(productInformation);
@@ -90,7 +104,7 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     }
 
     const returnValues = {
-        handleChange, handleSubmit,
+        handleChange, handleSubmit, handleUploadImage,
         productInformation, setValues, errors, categories, disabledButton, circularProgress,
     }
     return returnValues
