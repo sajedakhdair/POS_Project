@@ -22,7 +22,7 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         if (id) {
             fetchGetProductById(id).then((data) => {
                 setSelectedProduct(data)
-                setValues(data);
+                setValues({ ...productInformation, ...data });
             }).catch((error) => {
                 console.error(error);
             })
@@ -38,10 +38,10 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         category: "Category",
         code: "000000",
         image: "",
-        description: "Enter Product description",
+        description: "",
         quantity: 0,
-        expirationDate: new Date().toString(),
-        stockCount: 0
+        expirationDate: "",
+        stockCount: ""
     });
 
     const [errors, setErrors] = useState({
@@ -80,10 +80,8 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
             }
             else {
                 setErrors({ ...productFormErrors, codeError: "product code must be unique" })
-                console.log(productFormErrors)
                 setCircularProgress(false);
                 setDisabledButton(false);
-                onClose();
             }
         }
         else {

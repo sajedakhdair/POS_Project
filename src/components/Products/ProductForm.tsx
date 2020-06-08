@@ -33,10 +33,6 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing(0.8),
       marginBottom: theme.spacing(0.8),
     },
-    inputTextHeight: {
-      maxHeight: theme.spacing(3),
-      width: theme.spacing(10),
-    },
     imageBox: {
       display: "flex",
       flexDirection: "column",
@@ -95,9 +91,6 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
             value={productInformation.name}
             onChange={handleChange}
             name="name"
-            inputProps={{
-              className: classes.inputTextHeight,
-            }}
           />
           <FormHelperText id="component-helper-text">
             {errors.nameError}
