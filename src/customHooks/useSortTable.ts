@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Order } from "../types";
+import { removeSymbols } from "../utils"
 
 const useSortTable = (initialOrderBy: any) => {
     const [order, setOrder] = useState<Order>("asc");
@@ -26,11 +27,6 @@ const useSortTable = (initialOrderBy: any) => {
         else
             return first > second
                 ? 1 : -1;
-    }
-
-    const removeSymbols = (sentence: string): string => {
-        const regex: RegExp = /\$|\%|\-/g;
-        return sentence.replace(regex, '');
     }
 
     const stableSort = <T>(array: T[], order: Order, orderBy: keyof T) => {

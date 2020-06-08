@@ -56,6 +56,12 @@ export const formatDate = () => {
 }
 
 // ** Product component **
+
+export const removeSymbols = (sentence: string): string => {
+    const regex: RegExp = /\$|\%|\-/g;
+    return sentence.replace(regex, '');
+}
+
 export const checkProductInformation = (productInformation: any): ProductFormErrors => {
     let errors: ProductFormErrors =
     {
@@ -78,7 +84,7 @@ export const checkProductInformation = (productInformation: any): ProductFormErr
         errors.priceError = "Price is required"
     else if (price <= 0)
         errors.priceError = "Price should be more than 0";
-    else if (price <= rawPrice)
+    else if (Number(removeSymbols(price)) <= Number(removeSymbols(rawPrice)))
         errors.priceError = "Price should be more than the raw price";
     if (code === "000000" || code.length === 0)
         errors.codeError = "Code is required"
