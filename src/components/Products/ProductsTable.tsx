@@ -109,9 +109,9 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
-                    const value = row[column.id];
+                    let value = row[column.id];
                     if (column.id === "category") {
-                      const categoryName = row[column.id].categoryName;
+                      value = (row.category && row.category.categoryName) || "";
                       return (
                         <TableCell
                           key={column.id}
@@ -119,7 +119,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                           className={classes.tableCell}
                           style={{ width: column.minWidth }}
                         >
-                          {categoryName}
+                          {value}
                         </TableCell>
                       );
                     }

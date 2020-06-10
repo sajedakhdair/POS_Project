@@ -16,7 +16,7 @@ const inputProduct: Product[] = [
     category: { id: 1, categoryName: "fruits" },
     quantity: 7,
     expirationDate: "2020-06-10",
-    stockCount: 1,
+    stockCount: "1",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const inputProduct: Product[] = [
     category: { id: 4, categoryName: "clothing" },
     quantity: 7,
     expirationDate: "2020-06-10",
-    stockCount: 2,
+    stockCount: "2",
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const inputProduct: Product[] = [
     category: { id: 3, categoryName: "computers" },
     quantity: 10,
     expirationDate: "2020-07-16",
-    stockCount: 19,
+    stockCount: "19",
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const inputProduct: Product[] = [
     description: "Chocolate with peanut Cream",
     quantity: 100,
     expirationDate: "2021-08-20",
-    stockCount: 9,
+    stockCount: "9",
   },
   {
     id: 5,
@@ -65,7 +65,7 @@ const inputProduct: Product[] = [
     category: { id: 2, categoryName: "services" },
     quantity: 10,
     expirationDate: "2020-09-23",
-    stockCount: 10,
+    stockCount: "10",
   },
 ];
 const productsTableColumns: Column<Product>[] = [

@@ -28,7 +28,7 @@ export interface Product {
     image?: string
     category: { id: number, categoryName: string }
     description?: string
-    stockCount: number
+    stockCount: string
     quantity: number;
     expirationDate: string
 }

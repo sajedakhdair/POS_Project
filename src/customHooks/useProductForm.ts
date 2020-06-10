@@ -24,7 +24,7 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         description: "",
         quantity: 0,
         expirationDate: "",
-        stockCount: 0
+        stockCount: ""
     });
     const [errors, setErrors] = useState({
         nameError: "",
