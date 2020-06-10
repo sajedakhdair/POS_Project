@@ -11,13 +11,13 @@ import { Theme, createStyles } from "@material-ui/core/styles";
 const styles = (theme: Theme) => createStyles({ button: {} });
 
 interface Props {
-  onClose: Function;
+  onConfirm: Function;
 }
 type CloseConfirmationProps = Props & WithStyles;
 
 const CloseConfirmation: React.FunctionComponent<CloseConfirmationProps> = ({
   classes,
-  onClose,
+  onConfirm,
 }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -54,7 +54,7 @@ const CloseConfirmation: React.FunctionComponent<CloseConfirmationProps> = ({
           <Button
             onClick={() => {
               handleClose();
-              onClose();
+              onConfirm();
             }}
             color="primary"
           >

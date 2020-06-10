@@ -14,6 +14,7 @@ const product: Product = {
   category: "services",
   quantity: 10,
   expirationDate: "2020-09-23",
+  stockCount: 10,
 };
 
 storiesOf("Dialog", module).add("ProductDetailsDiaolg", () => (

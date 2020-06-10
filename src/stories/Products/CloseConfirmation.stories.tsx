@@ -4,5 +4,5 @@ import { action } from "@storybook/addon-actions";
 import CloseConfirmation from "../../components/Products/CloseConfirmation";
 
 storiesOf("Dialog", module).add("CloseConfirmationDialog", () => (
-  <CloseConfirmation onClose={action("Close Button clicked")} />
+  <CloseConfirmation onConfirm={action("Close Button clicked")} />
 ));

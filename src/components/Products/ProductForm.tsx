@@ -70,8 +70,8 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
     handleChange,
     handleSubmit,
     handleUploadImage,
-    productInformation,
-    setValues,
+    productInfo,
+    setProductInfo,
     errors,
     categories,
     disabledButton,
@@ -89,7 +89,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           <InputLabel htmlFor="component-Name">Name</InputLabel>
           <OutlinedInput
             id="component-Name"
-            value={productInformation.name}
+            value={productInfo.name}
             onChange={handleChange}
             name="name"
           />
@@ -105,7 +105,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           <InputLabel htmlFor="component-Raw-Price">Raw Price</InputLabel>
           <OutlinedInput
             id="component-Raw-Price"
-            value={productInformation.rawPrice}
+            value={productInfo.rawPrice}
             onChange={handleChange}
             name="rawPrice"
           />
@@ -121,7 +121,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           <InputLabel htmlFor="component-Price">Price</InputLabel>
           <OutlinedInput
             id="component-Price"
-            value={productInformation.price}
+            value={productInfo.price}
             onChange={handleChange}
             name="price"
           />
@@ -137,7 +137,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           <InputLabel htmlFor="component-Code">Code</InputLabel>
           <OutlinedInput
             id="component-Code"
-            value={productInformation.code}
+            value={productInfo.code}
             onChange={handleChange}
             name="code"
           />
@@ -167,10 +167,10 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           <Select
             id="category-select"
             color="primary"
-            value={productInformation.category}
+            value={productInfo.category}
             onChange={(event) =>
-              setValues({
-                ...productInformation,
+              setProductInfo({
+                ...productInfo,
                 category: `${event.target.value}`,
               })
             }
@@ -193,7 +193,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           label="Description"
           multiline
           rows={4}
-          placeholder={productInformation.description}
+          placeholder={productInfo.description}
           variant="outlined"
         />
         <FormControl
@@ -204,7 +204,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           <InputLabel htmlFor="component-Stock">Stock Count</InputLabel>
           <OutlinedInput
             id="component-Stock"
-            value={productInformation.stockCount}
+            value={productInfo.stockCount}
             onChange={handleChange}
             name="stockCount"
           />
@@ -220,12 +220,12 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
             margin="normal"
             id="fromDate"
             label="expirationDate"
-            value={productInformation.expirationDate}
+            value={productInfo.expirationDate}
             error={Boolean(errors.expirationDateError)}
             helperText={errors.expirationDateError}
             onChange={(date) =>
-              setValues({
-                ...productInformation,
+              setProductInfo({
+                ...productInfo,
                 expirationDate: date ? `${date.toJSON()}`.slice(0, 10) : "",
               })
             }
@@ -237,7 +237,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
         <Divider />
         <Box className={classes.buttonsBox}>
           <CloseConfirmation
-            onClose={onClose}
+            onConfirm={onClose}
             classes={{ button: classes.button }}
           />
           <Button

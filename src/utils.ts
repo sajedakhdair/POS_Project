@@ -62,7 +62,7 @@ export const removeSymbols = (sentence: string): string => {
     return sentence.replace(regex, '');
 }
 
-export const checkProductInformation = (productInformation: any): ProductFormErrors => {
+export const checkProductInformation = (productInformation: Product): ProductFormErrors => {
     let errors: ProductFormErrors =
     {
         nameError: "",
@@ -76,13 +76,13 @@ export const checkProductInformation = (productInformation: any): ProductFormErr
 
     const { name, rawPrice, price, tax, category, code } = productInformation
 
-    if (name.length === 0 || name === "Name")
+    if (name.length === 0)
         errors.nameError = "Name is required"
-    if (rawPrice === 0 || rawPrice.length === 0)
+    if (rawPrice.length === 0)
         errors.rawPriceError = "Raw Price is required"
-    if (price === 0 || price.length === 0)
+    if (price.length === 0)
         errors.priceError = "Price is required"
-    else if (price <= 0)
+    else if (Number(price) <= 0)
         errors.priceError = "Price should be more than 0";
     else if (Number(removeSymbols(price)) <= Number(removeSymbols(rawPrice)))
         errors.priceError = "Price should be more than the raw price";

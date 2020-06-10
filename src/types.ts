@@ -28,9 +28,9 @@ export interface Product {
     image?: string
     category: string
     description?: string
-    stockCount?: string
+    stockCount: number
     quantity: number;
-    expirationDate?: string
+    expirationDate: string
 }
 
 export interface ProductFormErrors {
