@@ -70,6 +70,7 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
     handleChange,
     handleSubmit,
     handleUploadImage,
+    handleSelectChange,
     productInfo,
     setProductInfo,
     errors,
@@ -167,18 +168,12 @@ const ProductForm: React.FunctionComponent<ProductFormProps> = ({
           <Select
             id="category-select"
             color="primary"
-            value={productInfo.category}
-            onChange={(event) =>
-              setProductInfo({
-                ...productInfo,
-                category: `${event.target.value}`,
-              })
-            }
-            name="category"
+            value={productInfo.category.id}
+            onChange={handleSelectChange}
           >
             {categories.map((category) => {
               return (
-                <MenuItem value={category.name} key={category.name}>
+                <MenuItem value={category.id} key={category.id}>
                   {category.name}
                 </MenuItem>
               );

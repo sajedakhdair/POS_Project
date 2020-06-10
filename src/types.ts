@@ -26,7 +26,7 @@ export interface Product {
     code: string;
     color?: string
     image?: string
-    category: string
+    category: { id: number, categoryName: string }
     description?: string
     stockCount: number
     quantity: number;

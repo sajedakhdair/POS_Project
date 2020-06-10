@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { ProductFormErrors, Category, Product } from "../types";
 import { checkProductInformation, isThereAnyProductError } from "../utils"
 import React from "react";
-import { fetchCategories } from "../apis/fetchCategories";
+import { fetchCategories, fetchCategoiesById } from "../apis/fetchCategories";
 import { fetchGetProductById, fetchStoreImageFileAsUrl } from "../apis/fetchProducts";
 
 const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
@@ -11,13 +11,14 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     const [disabledButton, setDisabledButton] = useState(false);
     const [circularProgress, setCircularProgress] = useState(false);
     const [imgSource, setImagSource] = useState<any>();
+    const [selectedCategory, setSelectedCategory] = useState({ id: 1, categoryName: "fruits" });
     const [productInfo, setProductInfo] = useState<Product>({
         id: 0,
         name: "",
         rawPrice: '',
         price: '',
         tax: '',
-        category: "",
+        category: { id: 0, categoryName: "" },
         code: "",
         image: "",
         description: "",
@@ -57,6 +58,19 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         const { name, value } = event.target;
         setProductInfo({ ...productInfo, [name]: value });
     };
+
+    const handleSelectChange = (event: React.ChangeEvent<{
+        name?: string | undefined;
+        value: unknown;
+    }>, child: React.ReactNode) => {
+        fetchCategoiesById(Number(event.target.value)).then((category) => {
+            setSelectedCategory({ id: Number(event.target.value), categoryName: category.name })
+        })
+    };
+
+    useEffect(() => {
+        setProductInfo({ ...productInfo, category: selectedCategory })
+    }, [selectedCategory])
 
     const handleUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
         let fileInput = event.target.files ? event.target.files[0] : "";
@@ -102,8 +116,9 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     }
 
     const returnValues = {
-        handleChange, handleSubmit, handleUploadImage,
-        productInfo, setProductInfo, errors, categories, disabledButton, circularProgress,
+        handleChange, handleSubmit, handleUploadImage, handleSelectChange,
+        productInfo, setProductInfo, errors, categories,
+        disabledButton, circularProgress,
     }
     return returnValues
 };

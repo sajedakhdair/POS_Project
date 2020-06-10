@@ -110,6 +110,19 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
                     const value = row[column.id];
+                    if (column.id === "category") {
+                      const categoryName = row[column.id].categoryName;
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          className={classes.tableCell}
+                          style={{ width: column.minWidth }}
+                        >
+                          {categoryName}
+                        </TableCell>
+                      );
+                    }
                     return (
                       <TableCell
                         key={column.id}

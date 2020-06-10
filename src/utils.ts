@@ -88,7 +88,7 @@ export const checkProductInformation = (productInformation: Product): ProductFor
         errors.priceError = "Price should be more than the raw price";
     if (code === "000000" || code.length === 0)
         errors.codeError = "Code is required"
-    if (category.length === 0 || category === "Category")
+    if (category.categoryName.length === 0)
         errors.categoryError = "Category is required"
     if (new Date(productInformation.expirationDate) < new Date())
         errors.expirationDateError = "Expiration Date should be more than date of today";
