@@ -3,7 +3,7 @@ import { ProductFormErrors, Category, Product } from "../types";
 import { checkProductInformation, isThereAnyProductError } from "../utils"
 import React from "react";
 import { fetchCategories } from "../apis/fetchCategories";
-import { fetchGetProductById } from "../apis/fetchProducts";
+import { fetchGetProductById, fetchStoreImageFileAsUrl } from "../apis/fetchProducts";
 
 const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     const [categories, setCategories] = useState<Category[]>([]);
@@ -11,7 +11,7 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
     const [disabledButton, setDisabledButton] = useState(false);
     const [circularProgress, setCircularProgress] = useState(false);
     const [imgSource, setImagSource] = useState<any>();
-    
+
     useEffect(() => {
         fetchCategories()
             .then((data) => {
@@ -60,14 +60,14 @@ const useProductForm = (onSubmit: Function, onClose: Function, id?: string) => {
         setValues({ ...productInformation, [name]: value });
     };
 
-    const handleUploadImage = (event: any) => {
-        let file = event.target.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = function () {
-            setImagSource(reader.result);
-        }
-    }
+    const handleUploadImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        let fileInput = event.target.files ? event.target.files[0] : "";
+        let pathTofile = event.target.value;
+
+        await fetchStoreImageFileAsUrl(fileInput, pathTofile).then((response) => {
+            setImagSource(response.image.url)
+        });
+    };
 
     useEffect(() => {
         setValues({ ...productInformation, image: `${imgSource}` })

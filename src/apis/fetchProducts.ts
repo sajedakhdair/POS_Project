@@ -58,3 +58,20 @@ export const fetchEditProduct = (selectedProduct: Product, editedProduct: Produc
         return result
     })
 };
+
+export const fetchStoreImageFileAsUrl = (fileInput: Blob | string, pathTofile: string) => {
+    const data = new FormData();
+    data.append(
+        "source",
+        fileInput,
+        pathTofile);
+    data.append("action", "upload");
+    data.append("type", "file");
+
+    const requestOptions = {
+        method: "POST",
+        body: data,
+    };
+    return fetch("https://imgbb.com/json", requestOptions)
+        .then((response) => { return response.json() })
+}
