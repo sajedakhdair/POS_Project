@@ -11,9 +11,10 @@ const product: Product = {
   tax: "12%",
   code: "126547",
   image: "computerRepair.jpeg",
-  category: "services",
+  category: { id: 2, categoryName: "services" },
   quantity: 10,
   expirationDate: "2020-09-23",
+  stockCount: "10",
 };
 
 storiesOf("Dialog", module).add("ProductDetailsDiaolg", () => (

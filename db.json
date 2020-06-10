@@ -62,10 +62,15 @@
       "price": "30.00$",
       "tax": "18%",
       "code": "856512",
-      "image": "Kiwi.jpg",
-      "category": "Fruits",
+      "image": "https://i.ibb.co/8sv8zBZ/Kiwi.jpg",
+      "category": {
+        "id": 1,
+        "categoryName": "fruits"
+      },
       "quantity": 7,
-      "expirationDate": "2020-06-10"
+      "expirationDate": "2020-06-30",
+      "description": "",
+      "stockCount": ""
     },
     {
       "id": 2,
@@ -74,7 +79,10 @@
       "price": "40.00$",
       "tax": "0%",
       "code": "112345",
-      "category": "Clothing",
+      "category": {
+        "id": 4,
+        "categoryName": "clothing"
+      },
       "quantity": 7,
       "expirationDate": "2020-06-10"
     },
@@ -85,7 +93,10 @@
       "price": "350.00$",
       "tax": "18%",
       "code": "123456",
-      "category": "computers",
+      "category": {
+        "id": 3,
+        "categoryName": "computers"
+      },
       "quantity": 10,
       "expirationDate": "2020-07-16"
     },
@@ -96,11 +107,15 @@
       "price": "20.00$",
       "tax": "3%",
       "code": "115239",
-      "image": "BonOBon.jpg",
-      "category": "chocolate",
+      "image": "https://i.ibb.co/3kkrBFk/BonOBon.jpg",
+      "category": {
+        "id": 5,
+        "categoryName": "chocolate"
+      },
       "description": "Chocolate with peanut Cream",
       "quantity": 100,
-      "expirationDate": "2021-08-20"
+      "expirationDate": "2021-08-20",
+      "stockCount": ""
     },
     {
       "id": 5,
@@ -110,7 +125,10 @@
       "tax": "12%",
       "code": "126547",
       "image": "computerRepair.jpeg",
-      "category": "services",
+      "category": {
+        "id": 2,
+        "categoryName": "services"
+      },
       "quantity": 10,
       "expirationDate": "2020-09-23"
     }

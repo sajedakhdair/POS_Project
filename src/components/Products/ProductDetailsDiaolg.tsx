@@ -118,7 +118,7 @@ const ProductDetailsDiaolg: React.FunctionComponent<ProductDetailsPopupProps> = 
               {product.image ? (
                 <img
                   className={classes.productImage}
-                  src={require(`../../imgs/${product.image}`)}
+                  src={`${product.image}`}
                   alt="img"
                 ></img>
               ) : (

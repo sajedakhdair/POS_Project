@@ -7,6 +7,11 @@ export const fetchCategories = (): Promise<Category[]> => {
         .then((response) => response.json())
 };
 
+export const fetchCategoiesById = (id: number): Promise<Category> => {
+    return fetch(`${baseUrl}/categories/${id}`)
+        .then((response) => response.json())
+};
+
 export const fetchDeleteCategory = (id: string) => {
     return fetch(`${baseUrl}/categories/${id}`, {
         method: "DELETE",

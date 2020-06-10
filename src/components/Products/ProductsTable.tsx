@@ -16,6 +16,7 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteDialog from "../DeleteDialog";
 import ProductDetailsDiaolg from "./ProductDetailsDiaolg";
+import { useHistory } from "react-router-dom";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -39,6 +40,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
   onDelete: handleDelete,
   onEdit: handleEdit,
 }) => {
+  const history = useHistory();
   const { createSortHandler, stableSort, order, orderBy } = useSortTable(
     columns[0].id
   );
@@ -107,7 +109,20 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                   {columns.map((column) => {
-                    const value = row[column.id];
+                    let value = row[column.id];
+                    if (column.id === "category") {
+                      value = (row.category && row.category.categoryName) || "";
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          className={classes.tableCell}
+                          style={{ width: column.minWidth }}
+                        >
+                          {value}
+                        </TableCell>
+                      );
+                    }
                     return (
                       <TableCell
                         key={column.id}
@@ -124,7 +139,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        handleEdit(row);
+                        history.push(`/products/${row.id}/edit`);
                       }}
                     >
                       <EditIcon fontSize="small" />

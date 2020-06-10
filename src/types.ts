@@ -10,6 +10,7 @@ export interface errorsProps {
     flagForPasswordError: boolean;
     passwordError: string;
 }
+
 export interface Category {
     id: number;
     name: string;
@@ -25,11 +26,21 @@ export interface Product {
     code: string;
     color?: string
     image?: string
-    category: string
+    category: { id: number, categoryName: string }
     description?: string
-    stockCount?: number
+    stockCount: string
     quantity: number;
-    expirationDate?: string
+    expirationDate: string
+}
+
+export interface ProductFormErrors {
+    nameError: string;
+    rawPriceError: string;
+    priceError: string;
+    codeError: string;
+    categoryError: string
+    expirationDateError: string
+    stockCountError: string
 }
 
 export interface Column<T> {
